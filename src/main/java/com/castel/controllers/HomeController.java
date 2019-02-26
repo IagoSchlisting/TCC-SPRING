@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class HomeController extends BaseController {
@@ -26,7 +28,10 @@ public class HomeController extends BaseController {
         model.addAttribute("principal", principal);
 
         for (Role role: principal.getRoles()){
-            if(new String(role.getRole()).equals("ROLE_OWNER") || new String(role.getRole()).equals("ROLE_MEMBER")){
+            if(new String(role.getRole()).equals("ROLE_OWNER") || new String(role.getRole()).equals("ROLE_USER")){
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                model.addAttribute("diaatual", formatter.format(date));
                 return "homepage";
             }
         }

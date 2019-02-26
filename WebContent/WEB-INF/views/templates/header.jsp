@@ -1,4 +1,4 @@
-
+<html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -10,9 +10,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap Library// -->
 
-<html>
+
 <head>
-    <title> Organization Manager  </title>
+    <title> Pizza Manager  </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
 </head>
 
 
@@ -30,14 +32,20 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="/"> Castel System </a>
+            <a class="navbar-brand" href="/"> Sistema Castel </a>
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <c:if test="${not member}">
-                <li><a href=""> --- </a></li>
-            </c:if>
+            <li><a href="/">Controle de Usuários</a></li>
+            <li><a href="/"> Administração de Valores</a></li>
+            <li><a href="/"> Banco de Sabores</a></li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Relatórios <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/"> Pedidos </a></li>
+                    <li><a href="/"> Problemas </a></li>
+                </ul>
+            </li>
         </ul>
 
 

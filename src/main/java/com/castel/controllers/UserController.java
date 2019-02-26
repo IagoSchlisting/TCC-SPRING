@@ -85,7 +85,7 @@ public class UserController extends BaseController{
      */
     public List<Role> giveRoles(Boolean owner){
         List<Role> roles = new ArrayList<Role>();
-        List<String> roles_string = Arrays.asList("ROLE_USER", "ROLE_OWNER", "ROLE_MEMBER");
+        List<String> roles_string = Arrays.asList("ROLE_USER", "ROLE_OWNER");
         Role new_role;
 
         for (String role : roles_string) {
