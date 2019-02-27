@@ -58,6 +58,16 @@ public class HomeController extends BaseController {
         return "login";
     }
 
+    @RequestMapping(value = "/relpedidos" , method = RequestMethod.GET)
+    public String relatorioDePedidosPage(){
+        return "relpedidos";
+    }
+
+    @RequestMapping(value = "/relproblemas" , method = RequestMethod.GET)
+    public String relatorioDeProblemasPage(){
+        return "relproblemas";
+    }
+
     /**
      * Redirects to 403 page
      * @return not authorized page
@@ -67,3 +77,6 @@ public class HomeController extends BaseController {
         return "errors/403";
     }
 }
+
+
+

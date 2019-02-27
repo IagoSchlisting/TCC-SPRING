@@ -32,7 +32,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="/"> Sistema Castel </a>
+            <a class="navbar-brand" href="/" style="background-color:#9bcc95; color:#f3f3f3"> Sistema Castel </a>
         </div>
 
         <ul class="nav navbar-nav">
@@ -42,8 +42,8 @@
             <li class="dropdown">
                 <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Relatórios <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/"> Pedidos </a></li>
-                    <li><a href="/"> Problemas </a></li>
+                    <li><a href="/relpedidos"> Pedidos </a></li>
+                    <li><a href="/relproblemas"> Problemas </a></li>
                 </ul>
             </li>
         </ul>
