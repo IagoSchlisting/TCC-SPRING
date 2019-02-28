@@ -67,6 +67,16 @@ public class HomeController extends BaseController {
     public String relatorioDeProblemasPage(){
         return "relproblemas";
     }
+    @RequestMapping(value = "/administracao-valores" , method = RequestMethod.GET)
+    public String administracaoDeValoresPage(){
+        return "administracao-valores";
+    }
+    @RequestMapping(value = "/administracao-usuarios" , method = RequestMethod.GET)
+    public String administracaoDeUsuariosPage(Model model){
+        model.addAttribute("users", this.userService.listUsers(this.getPrincipalUser().getId()));
+        return "administracao-usuarios";
+    }
+
 
     /**
      * Redirects to 403 page

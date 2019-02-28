@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
@@ -20,38 +21,31 @@ public class UserController extends BaseController{
     @Resource
     private RoleService roleService;
 
-    /**
-     * Method responsible for registering a new OWNER in the system. New member type users don't pass through this method.
-     * @param model
-     * @param request
-     * @return / redirects to the login page with a success or error message
-     */
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    private ModelAndView addOwner(Model model, WebRequest request){
-        model.addAttribute("stay", true);
-        String username = request.getParameter("new_username");
-        String password = request.getParameter("new_password");
-        String confirm_pass = request.getParameter("confirm_password");
+
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public RedirectView adicionarUsuario(Model model, WebRequest request, RedirectAttributes redirectAttributes){
+        String username = request.getParameter("username");
+        String accessLevel = request.getParameter("accessLevel");
 
         String error = "";
-        if(username.isEmpty() || password.isEmpty()){ error = "Username or password cannot be empty!"; }
+        if(username.isEmpty()){ error = "Username or password cannot be empty!"; }
         if(userAlreadyExists(username)){ error = "Not possible to register the user in the system! Username already exists."; }
-        if(!new String(password).equals(confirm_pass)){ error = "Passwords doesn't match!"; }
         if(!error.isEmpty()){
-            model.addAttribute("error", error);
-            return new ModelAndView("/login");
+//            model.addAttribute("error", error);
+            redirectAttributes.addFlashAttribute("error", error);
+            return new RedirectView("/login");
         }
+
         try{
-            List<Role> roles = giveRoles(true);
-            this.createUser(username, password, roles);
-            model.addAttribute("stay", false);
-            model.addAttribute("msg", "You've been registered successfully. Try to Log in!");
+            List<Role> roles = giveRoles(accessLevel.equals("1") ? true : false);
+            this.createUser(username, "12345", roles);
+            redirectAttributes.addFlashAttribute("msg", "Usuário registrado com sucesso!");
         }
         catch (Exception e){
-            model.addAttribute("error", e.getMessage());
-        }
-        return new ModelAndView("/login");
+            redirectAttributes.addFlashAttribute("error", e.getMessage());        }
+        return new RedirectView("/administracao-usuarios");
     }
+
 
     /**
      * Responsible for saving users in the database.
@@ -102,71 +96,20 @@ public class UserController extends BaseController{
     }
 
     /**
-     * Method responsible for deleting member
+     * Method responsible for deleting user
      * @param id
-     * @param model
-     * @return owner's page
+     * @param redirectAttributes
      */
-    @RequestMapping("/user/delete/{id}")
-    public RedirectView removeMember(@PathVariable("id") int id, Model model){
+    @RequestMapping("/user/remove/{id}")
+    public RedirectView removeUser(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
         try{
             userService.removeUser(id);
+            redirectAttributes.addFlashAttribute("msg", "Usuário removido com sucesso.");
         }catch (RuntimeException e){
-            return new RedirectView("/403");
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new RedirectView("/administracao-usuarios");
         }
-        return new RedirectView("/");
-    }
-
-    /**
-     * Method responsible for editing user
-     * @param id
-     * @param model
-     * @return edit page
-     */
-    @RequestMapping("/user/edit/{id}")
-    public String editMember(@PathVariable("id") int id, Model model){
-        if(this.userService.notAuthorized(id)){return "errors/403";}
-        model.addAttribute("user", userService.getUserById(id));
-        return "add-edit-user";
-    }
-
-    /**
-     * Only redirects to the add user's page
-     * @return add page
-     */
-    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
-    public String addMember(){
-        return "add-edit-user";
-    }
-
-    /**
-     * Responsible for adding new member. Action called through the owners interface
-     * @param model
-     * @param request
-     * @return success or error message in the add/edit page
-     */
-    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public String addMember(Model model, WebRequest request){
-        String username = request.getParameter("username");
-
-        if(username.isEmpty()){
-            model.addAttribute("error", "Username can't be empty!");
-            return "add-edit-user";
-        }
-        if(userAlreadyExists(username)){
-            model.addAttribute("error", "Not possible to add the member! Username already exists.");
-            return "add-edit-user";
-        }
-
-        try {
-            List<Role> roles = giveRoles(false);
-            User user = this.createUser(username, "password", roles);
-            model.addAttribute("msg", "New member registered successfully!");
-        }
-        catch (Exception e){
-            model.addAttribute("error", e.getMessage());
-        }
-        return "add-edit-user";
+        return new RedirectView("/administracao-usuarios");
     }
 
 

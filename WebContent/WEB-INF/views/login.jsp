@@ -23,12 +23,12 @@
             <div class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">Login</a>
+                        <div class="col-xs-12">
+                            <a href="#" class="active" id="login-form-link"> Castel System Login </a>
                         </div>
-                        <div class="col-xs-6">
-                            <a href="#" id="register-form-link">Register</a>
-                        </div>
+                        <%--<div class="col-xs-6">--%>
+                            <%--<a href="#" id="register-form-link">Register</a>--%>
+                        <%--</div>--%>
                     </div>
                     <hr>
                 </div>

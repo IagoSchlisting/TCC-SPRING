@@ -22,8 +22,8 @@ public class UserDaoImp extends HibernateDaoSupport implements UserDao {
     }
 
     @Override
-    public List<User> listUsers(int team_id, int user_id) {
-        return (List<User>) getHibernateTemplate().find("from com.castel.models.User where not USER_ID = "+ user_id +" and TEAM_ID = " + team_id);
+    public List<User> listUsers(int user_id) {
+        return (List<User>) getHibernateTemplate().find("from com.castel.models.User where not USER_ID = "+ user_id);
     }
 
     @Override
@@ -48,6 +48,12 @@ public class UserDaoImp extends HibernateDaoSupport implements UserDao {
     @Override
     @Transactional
     public void removeUser(int id) {
+        User user = this.getUserById(id);
+
+        if(user.getUsername().equals("iago.machado")){
+            throw new RuntimeException("Ação não autorizada, o usuário iago.machado não pode ser removido.");
+        }
+
         getHibernateTemplate().delete(this.getUserById(id));
     }
 
