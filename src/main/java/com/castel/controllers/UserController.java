@@ -31,7 +31,6 @@ public class UserController extends BaseController{
         if(username.isEmpty()){ error = "Username or password cannot be empty!"; }
         if(userAlreadyExists(username)){ error = "Not possible to register the user in the system! Username already exists."; }
         if(!error.isEmpty()){
-//            model.addAttribute("error", error);
             redirectAttributes.addFlashAttribute("error", error);
             return new RedirectView("/login");
         }
