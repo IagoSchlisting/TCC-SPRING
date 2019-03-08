@@ -43,19 +43,10 @@
     padding: 5px 50px 5px 50px;
     margin-top: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
+.btn-save-values{
+    padding-left: 50px;
+    padding-right: 50px;
+}
 
 
 .no-padding {
@@ -103,19 +94,11 @@
     text-align: center;
     color: #333; }
 
-/*.panel-blue {*/
-    /*background: #30a5ff;*/
-    /*color: #fff; }*/
-
-/*.panel-teal {*/
-    /*background: #1ebfae;*/
-    /*color: #fff; }*/
-
-/*.panel-orange {*/
-    /*background: #ffb53e;*/
-    /*color: #fff; }*/
-
-/*.panel-red {*/
-    /*background: #f9243f;*/
-    /*color: #fff; }*/
-
+.div-table-title{
+    background-color: #bcbcbc;
+    padding: 5px;
+}
+.div-table-title-font{
+    margin-left: 10px;
+    color:white;
+}
