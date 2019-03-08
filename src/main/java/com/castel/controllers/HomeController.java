@@ -1,6 +1,7 @@
 package com.castel.controllers;
 import com.castel.models.Role;
 import com.castel.models.User;
+import com.castel.service.BebidaService;
 import com.castel.service.SaborService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,10 @@ public class HomeController extends BaseController {
 
     @Resource
     private SaborService saborService;
+
+    @Resource
+    private BebidaService bebidaService;
+
 
     /**
      * Verify if user is from owner or member type and redirects accordingly
@@ -92,6 +97,13 @@ public class HomeController extends BaseController {
         model.addAttribute("sabores", this.saborService.listSabores());
         return "banco-de-sabores";
     }
+
+    @RequestMapping(value = "/banco-de-bebidas" , method = RequestMethod.GET)
+    public String bancoDeBebidasPage(Model model){
+        model.addAttribute("bebidas", this.bebidaService.listBebidas());
+        return "banco-de-bebidas";
+    }
+
 
 
 

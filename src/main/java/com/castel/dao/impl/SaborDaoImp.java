@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class SaborDaoImpl extends HibernateDaoSupport implements SaborDao {
+public class SaborDaoImp extends HibernateDaoSupport implements SaborDao {
 
     @Override
     @Transactional

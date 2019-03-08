@@ -7,7 +7,7 @@ import com.castel.service.SaborService;
 import javax.annotation.Resource;
 import java.util.List;
 
-public class SaborServiceImpl implements SaborService {
+public class SaborServiceImp implements SaborService {
 
     @Resource
     private SaborDao saborDao;
