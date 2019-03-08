@@ -21,4 +21,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean name="saborService" class="com.castel.service.impl.SaborServiceImpl">
+    </bean>
+    <bean name="saborDao" class="com.castel.dao.impl.SaborDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
 </beans>

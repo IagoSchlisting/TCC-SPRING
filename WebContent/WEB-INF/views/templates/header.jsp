@@ -38,7 +38,7 @@
         <ul class="nav navbar-nav">
             <li><a href="/administracao-usuarios">Controle de Usuários</a></li>
             <li><a href="/administracao-valores"> Administração de Valores</a></li>
-            <li><a href="/"> Banco de Sabores</a></li>
+            <li><a href="/banco-de-sabores"> Banco de Sabores</a></li>
             <li class="dropdown">
                 <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Relatórios <span class="caret"></span></a>
                 <ul class="dropdown-menu">

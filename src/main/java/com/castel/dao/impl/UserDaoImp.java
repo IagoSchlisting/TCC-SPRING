@@ -49,12 +49,10 @@ public class UserDaoImp extends HibernateDaoSupport implements UserDao {
     @Transactional
     public void removeUser(int id) {
         User user = this.getUserById(id);
-
         if(user.getUsername().equals("iago.machado")){
             throw new RuntimeException("Ação não autorizada, o usuário iago.machado não pode ser removido.");
         }
-
-        getHibernateTemplate().delete(this.getUserById(id));
+        getHibernateTemplate().delete(user);
     }
 
 }

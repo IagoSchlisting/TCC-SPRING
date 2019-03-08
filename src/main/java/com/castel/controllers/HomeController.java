@@ -1,19 +1,27 @@
 package com.castel.controllers;
 import com.castel.models.Role;
 import com.castel.models.User;
+import com.castel.service.SaborService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HomeController extends BaseController {
+
+
+    @Resource
+    private SaborService saborService;
 
     /**
      * Verify if user is from owner or member type and redirects accordingly
@@ -67,15 +75,24 @@ public class HomeController extends BaseController {
     public String relatorioDeProblemasPage(){
         return "relproblemas";
     }
+
     @RequestMapping(value = "/administracao-valores" , method = RequestMethod.GET)
     public String administracaoDeValoresPage(){
         return "administracao-valores";
     }
+
     @RequestMapping(value = "/administracao-usuarios" , method = RequestMethod.GET)
     public String administracaoDeUsuariosPage(Model model){
         model.addAttribute("users", this.userService.listUsers(this.getPrincipalUser().getId()));
         return "administracao-usuarios";
     }
+
+    @RequestMapping(value = "/banco-de-sabores" , method = RequestMethod.GET)
+    public String bancoDeSaboresPage(Model model){
+        model.addAttribute("sabores", this.saborService.listSabores());
+        return "banco-de-sabores";
+    }
+
 
 
     /**
