@@ -104,6 +104,12 @@ public class HomeController extends BaseController {
         return "banco-de-bebidas";
     }
 
+    @RequestMapping(value = "/add-edit-pedido" , method = RequestMethod.GET)
+    public String AdicionarEditarPedidoPage(Model model){
+        return "add-edit-pedido";
+    }
+
+
 
 
 

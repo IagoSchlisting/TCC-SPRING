@@ -35,7 +35,7 @@ public class BebidaController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 
-        return new RedirectView("/banco-de-bebidaes");
+        return new RedirectView("/banco-de-bebidas");
     }
 
     @RequestMapping(value = "/bebida/remove/{id}", method = RequestMethod.GET)

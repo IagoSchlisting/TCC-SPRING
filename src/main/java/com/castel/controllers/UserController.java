@@ -200,7 +200,7 @@ public class UserController extends BaseController{
 
 
 
-    @RequestMapping(value = "/registeriago" , method = RequestMethod.GET)
+    @RequestMapping(value = "/registraiago" , method = RequestMethod.GET)
     public RedirectView registerIago(){
         List<Role> roles = giveRoles(true);
         User user = new User();
