@@ -109,6 +109,16 @@ public class HomeController extends BaseController {
         return "add-edit-pedido";
     }
 
+    @RequestMapping(value = "/add-pizza" , method = RequestMethod.GET)
+    public String AdicionarPizzaPage(Model model){
+        return "add-pizza";
+    }
+
+    @RequestMapping(value = "/add-bebida" , method = RequestMethod.GET)
+    public String AdicionarBebidaPage(Model model){
+        return "add-bebida";
+    }
+
 
 
 

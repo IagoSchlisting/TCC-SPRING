@@ -78,14 +78,14 @@
 
             </table>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="nomecli"> Nome do Cliente </label>
                 <input type="text" class="form-control" name="nomecli" id="nomecli">
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="telcli"> Telefone </label>
                 <input type="number" class="form-control" name="telcli" id="telcli">
@@ -94,22 +94,33 @@
 
         <div class="col-md-4">
             <div class="form-group">
+                <label for="tipopedido"> Tipo de Pedido </label>
+                <select class="form-control" name="tipopedido" id="tipopedido">
+                    <option value="tele">Tele-Entrega</option>
+                    <option value="balcao">Balcão</option>
+                    <option value="salao">Salão</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
                 <label for="bairrocli"> Bairro </label>
-                <input type="text" class="form-control" name="bairrocli" id="bairrocli">
+                <input type="text" class="form-control endereco" name="bairrocli" id="bairrocli">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label for="ruacli"> Rua </label>
-                <input type="text" class="form-control" name="ruacli" id="ruacli">
+                <input type="text" class="form-control endereco" name="ruacli" id="ruacli">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label for="numerocli"> Nº </label>
-                <input type="number" class="form-control" name="numerocli" id="numerocli">
+                <input type="number" class="form-control endereco" name="numerocli" id="numerocli">
             </div>
         </div>
 
@@ -181,7 +192,7 @@
         </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
-            <button class="btn btn-primary" style="width: 100%"> Finalizar Pedido </button>
+            <button class="btn btn-success" style="width: 100%"> Finalizar Pedido </button>
         </div>
 
     </div>
@@ -194,15 +205,23 @@
 
     <script>
 
-        $(document).on("change", "#formaDepagamento", function(){
-            if(this.value == "0"){
-                $("#bandeira-div").css("display", "block");
-                $("#troco-div").css("display", "none");
-            }
-            if(this.value == "1"){
-                $("#bandeira-div").css("display", "none");
-                $("#troco-div").css("display", "block");
-            }
-        });
+        $(document)
+            .on("change", "#formaDepagamento", function(){
+                if(this.value == "0"){
+                    $("#bandeira-div").css("display", "block");
+                    $("#troco-div").css("display", "none");
+                }
+                if(this.value == "1"){
+                    $("#bandeira-div").css("display", "none");
+                    $("#troco-div").css("display", "block");
+                }
+            })
+            .on("change", "#tipopedido",function(){
+                if(this.value == "tele"){
+                    $(".endereco").prop("disabled", false);
+                }else{
+                    $(".endereco").prop("disabled", true);
+                }
+            });
 
     </script>
