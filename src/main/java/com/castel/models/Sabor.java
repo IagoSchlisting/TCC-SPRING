@@ -1,8 +1,10 @@
 package com.castel.models;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "SABOR")
@@ -16,6 +18,10 @@ public class Sabor {
 
     @Column(unique = true)
     private String sabor;
+
+//    @OneToMany(mappedBy = "sabor")
+//    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
+//    private List<SaborPizza> saborespizza;
 
     private Boolean especial;
 
@@ -42,4 +48,12 @@ public class Sabor {
     public void setEspecial(Boolean especial) {
         this.especial = especial;
     }
+
+//    public List<SaborPizza> getSaborespizza() {
+//        return saborespizza;
+//    }
+//
+//    public void setSaborespizza(List<SaborPizza> saborespizza) {
+//        this.saborespizza = saborespizza;
+//    }
 }

@@ -31,15 +31,15 @@ public class Pedido {
             joinColumns = { @JoinColumn(name = "PEDIDO_ID") },
             inverseJoinColumns = { @JoinColumn(name = "PIZZA_ID") }
     )
-    private List<Pizza> pizza;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Pedido_Bebidas",
-            joinColumns = { @JoinColumn(name = "PEDIDO_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "BEBIDA_ID") }
-    )
-    private List<Bebida> bebidas;
+    private List<Pizza> pizzas;
+//
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "Pedido_Bebidas",
+//            joinColumns = { @JoinColumn(name = "PEDIDO_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "BEBIDA_ID") }
+//    )
+//    private List<Bebida> bebidas;
 
     @Enumerated(EnumType.ORDINAL)
     private TipoPagamento tipoPagamento;
@@ -90,21 +90,21 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public List<Pizza> getPizza() {
-        return pizza;
+    public List<Pizza> getPizzas() {
+        return pizzas;
     }
 
-    public void setPizza(List<Pizza> pizza) {
-        this.pizza = pizza;
+    public void setPizzas(List<Pizza> pizza) {
+        this.pizzas= pizza;
     }
 
-    public List<Bebida> getBebidas() {
-        return bebidas;
-    }
-
-    public void setBebidas(List<Bebida> bebidas) {
-        this.bebidas = bebidas;
-    }
+//    public List<Bebida> getBebidas() {
+//        return bebidas;
+//    }
+//
+//    public void setBebidas(List<Bebida> bebidas) {
+//        this.bebidas = bebidas;
+//    }
 
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
