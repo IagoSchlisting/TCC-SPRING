@@ -9,8 +9,10 @@
                 <label for="bebida"> Selecione a Bebida </label>
                 <select class="form-control" name="bebida" id="bebida">
                     <option value="0"> Selecione </option>
-                    <option value="coca"> Coca-Cola 2L </option>
-                    <option value="guarana"> Guarana </option>
+                    <c:forEach var="bebida" items="${bebidas}">
+                            <option value="${bebida.id}"> ${bebida.bebida} - R$${bebida.valor} / cada </option>
+                    </c:forEach>
+
                 </select>
             </div>
         </div>

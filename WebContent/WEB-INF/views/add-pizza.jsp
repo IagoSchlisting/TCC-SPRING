@@ -35,10 +35,9 @@
                     <label for="sabor1"> Sabor 1 </label>
                     <select class="form-control sabor" name="sabor1" id="sabor1">
                         <option value="0" selected="selected"> Selecione um Sabor </option>
-                        <option value="marguerita"> Marguerita </option>
-                        <option value="camarao"> Camarao </option>
-                        <option value="entrecot"> entrecot </option>
-                        <option value="brocolis"> Brócolis </option>
+                        <c:forEach var="sabor" items="${sabores}">
+                            <option value="${sabor.id}"> ${sabor.sabor} </option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
@@ -48,10 +47,9 @@
                     <label for="sabor2"> Sabor 2 </label>
                     <select class="form-control sabor" name="sabor2" id="sabor2">
                         <option value="0" selected="selected"> Selecione um Sabor </option>
-                        <option value="marguerita"> Marguerita </option>
-                        <option value="camarao"> Camarao </option>
-                        <option value="entrecot"> entrecot </option>
-                        <option value="brocolis"> Brócolis </option>
+                        <c:forEach var="sabor" items="${sabores}">
+                            <option value="${sabor.id}"> ${sabor.sabor} </option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
@@ -64,10 +62,9 @@
                     <label for="sabor3"> Sabor 3 </label>
                     <select class="form-control sabor" name="sabor3" id="sabor3">
                         <option value="0" selected="selected"> Selecione um Sabor </option>
-                        <option value="marguerita"> Marguerita </option>
-                        <option value="camarao"> Camarao </option>
-                        <option value="entrecot"> entrecot </option>
-                        <option value="brocolis"> Brócolis </option>
+                        <c:forEach var="sabor" items="${sabores}">
+                            <option value="${sabor.id}"> ${sabor.sabor} </option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
@@ -77,10 +74,9 @@
                     <label for="sabor4"> Sabor 4 </label>
                     <select class="form-control sabor" name="sabor4" id="sabor4">
                         <option value="0" selected="selected"> Selecione um Sabor </option>
-                        <option value="marguerita"> Marguerita </option>
-                        <option value="camarao"> Camarao </option>
-                        <option value="entrecot"> entrecot </option>
-                        <option value="brocolis"> Brócolis </option>
+                        <c:forEach var="sabor" items="${sabores}">
+                            <option value="${sabor.id}"> ${sabor.sabor} </option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>

@@ -111,11 +111,13 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/add-pizza" , method = RequestMethod.GET)
     public String AdicionarPizzaPage(Model model){
+        model.addAttribute("sabores", this.saborService.listSabores());
         return "add-pizza";
     }
 
     @RequestMapping(value = "/add-bebida" , method = RequestMethod.GET)
     public String AdicionarBebidaPage(Model model){
+        model.addAttribute("bebidas", this.bebidaService.listBebidas());
         return "add-bebida";
     }
 
