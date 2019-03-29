@@ -89,6 +89,7 @@
         </table>
 
         <div align="center" style="background-color: #f8f8f8; padding: 10px">
+            <a href="/" class="btn btn-danger btn-save-values"> Cancelar </a>
             <button class="btn btn-primary btn-save-values"> Salvar Valores </button>
         </div>
 

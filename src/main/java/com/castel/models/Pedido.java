@@ -36,6 +36,9 @@ public class Pedido {
     @Enumerated(EnumType.ORDINAL)
     private Bandeira bandeira;
 
+    @Enumerated(EnumType.ORDINAL)
+    private StatusPedido statusPedido;
+
     private Double troco;
 
 
