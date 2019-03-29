@@ -19,20 +19,19 @@ public class Pizza {
     @Enumerated(EnumType.ORDINAL)
     private TamanhoPizza tamanhoPizza;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "Pizza_Sabores",
-//            joinColumns = { @JoinColumn(name = "PIZZA_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "SABORPIZZA_ID") }
-//    )
-//    private List<SaborPizza> sabores;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Pizza_Sabores",
+            joinColumns = { @JoinColumn(name = "PIZZA_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "SABORPIZZA_ID") }
+    )
+    private List<SaborPizza> sabores;
 
     private boolean comborda;
 
     @OneToMany(mappedBy = "pizza")
     @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
-    private List<Item> items;
+    private List<Item> itens;
 
     public Integer getId() {
         return id;
@@ -49,15 +48,15 @@ public class Pizza {
     public void setTamanhoPizza(TamanhoPizza tamanhoPizza) {
         this.tamanhoPizza = tamanhoPizza;
     }
+
+    public List<SaborPizza> getSabores() {
+        return sabores;
+    }
+
+    public void setSabores(List<SaborPizza> sabores) {
+        this.sabores = sabores;
+    }
 //
-//    public List<SaborPizza> getSabores() {
-//        return sabores;
-//    }
-//
-//    public void setSabores(List<SaborPizza> sabores) {
-//        this.sabores = sabores;
-//    }
-////
 
     public boolean isComborda() {
         return comborda;

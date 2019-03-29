@@ -19,9 +19,9 @@ public class Sabor {
     @Column(unique = true)
     private String sabor;
 
-//    @OneToMany(mappedBy = "sabor")
-//    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
-//    private List<SaborPizza> saborespizza;
+    @OneToMany(mappedBy = "sabor")
+    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
+    private List<SaborPizza> saborespizza;
 
     private Boolean especial;
 
