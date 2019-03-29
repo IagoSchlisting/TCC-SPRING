@@ -56,7 +56,6 @@ public class Pizza {
     public void setSabores(List<SaborPizza> sabores) {
         this.sabores = sabores;
     }
-//
 
     public boolean isComborda() {
         return comborda;
@@ -66,4 +65,11 @@ public class Pizza {
         this.comborda = comborda;
     }
 
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
 }
