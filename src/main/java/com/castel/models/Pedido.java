@@ -113,4 +113,12 @@ public class Pedido {
     public void setItens(List<Item> itens) {
         this.itens = itens;
     }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
 }

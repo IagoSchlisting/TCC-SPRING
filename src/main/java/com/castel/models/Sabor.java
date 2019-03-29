@@ -49,11 +49,11 @@ public class Sabor {
         this.especial = especial;
     }
 
-//    public List<SaborPizza> getSaborespizza() {
-//        return saborespizza;
-//    }
-//
-//    public void setSaborespizza(List<SaborPizza> saborespizza) {
-//        this.saborespizza = saborespizza;
-//    }
+    public List<SaborPizza> getSaborespizza() {
+        return saborespizza;
+    }
+
+    public void setSaborespizza(List<SaborPizza> saborespizza) {
+        this.saborespizza = saborespizza;
+    }
 }
