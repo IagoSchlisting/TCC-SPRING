@@ -1,5 +1,6 @@
 package com.castel.models;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -20,8 +21,9 @@ public class Bebida {
 
     private Double valor;
 
-//    @ManyToMany(mappedBy = "bebidas", fetch = FetchType.EAGER)
-//    private List<Pedido> pedidos;
+    @OneToMany(mappedBy = "bebida")
+    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
+    private List<Item> itens;
 
     public Integer getId() {
         return id;
@@ -46,12 +48,12 @@ public class Bebida {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-//
-//    public List<Pedido> getPedidos() {
-//        return pedidos;
-//    }
-//
-//    public void setPedidos(List<Pedido> pedidos) {
-//        this.pedidos = pedidos;
-//    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
 }

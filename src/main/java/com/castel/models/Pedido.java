@@ -1,5 +1,6 @@
 package com.castel.models;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -25,21 +26,9 @@ public class Pedido {
 
     private Double valorTotal;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Pedido_Pizzas",
-            joinColumns = { @JoinColumn(name = "PEDIDO_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "PIZZA_ID") }
-    )
-    private List<Pizza> pizzas;
-//
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "Pedido_Bebidas",
-//            joinColumns = { @JoinColumn(name = "PEDIDO_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "BEBIDA_ID") }
-//    )
-//    private List<Bebida> bebidas;
+    @OneToMany(mappedBy = "pedido")
+    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
+    private List<Item> itens;
 
     @Enumerated(EnumType.ORDINAL)
     private TipoPagamento tipoPagamento;
@@ -90,22 +79,6 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public List<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(List<Pizza> pizza) {
-        this.pizzas= pizza;
-    }
-
-//    public List<Bebida> getBebidas() {
-//        return bebidas;
-//    }
-//
-//    public void setBebidas(List<Bebida> bebidas) {
-//        this.bebidas = bebidas;
-//    }
-
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }
@@ -128,5 +101,13 @@ public class Pedido {
 
     public void setTroco(Double troco) {
         this.troco = troco;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
     }
 }

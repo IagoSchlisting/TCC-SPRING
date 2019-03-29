@@ -1,5 +1,6 @@
 package com.castel.models;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -26,10 +27,12 @@ public class Pizza {
 //    )
 //    private List<SaborPizza> sabores;
 
-    @ManyToMany(mappedBy = "pizzas", fetch = FetchType.EAGER)
-    private List<Pedido> pedidos;
 
     private boolean comborda;
+
+    @OneToMany(mappedBy = "pizza")
+    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
+    private List<Item> items;
 
     public Integer getId() {
         return id;
@@ -55,13 +58,6 @@ public class Pizza {
 //        this.sabores = sabores;
 //    }
 ////
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
 
     public boolean isComborda() {
         return comborda;
@@ -70,4 +66,5 @@ public class Pizza {
     public void setComborda(boolean comborda) {
         this.comborda = comborda;
     }
+
 }
