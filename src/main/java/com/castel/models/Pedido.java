@@ -1,6 +1,8 @@
 package com.castel.models;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -23,6 +25,10 @@ public class Pedido {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ENDERECO_ID")
     private Endereco endereco;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     private Double valorTotal;
 
@@ -120,5 +126,13 @@ public class Pedido {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

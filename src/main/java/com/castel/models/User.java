@@ -1,6 +1,8 @@
 package com.castel.models;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -31,6 +33,10 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }
     )
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
+    private List<Pedido> pedidos;
 
     public Integer getId() {
         return id;
@@ -72,4 +78,11 @@ public class User {
         this.enabled = enabled;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }

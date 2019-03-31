@@ -3,7 +3,7 @@
 
 
 <div class="panel panel-default">
-    <div class="panel-heading">  Adicionar / Editar Pedido </div>
+    <div class="panel-heading">  ${type} pedido número ${pedido.id} </div>
     <div class="panel-body">
             <table class="table table-striped">
                 <tr>

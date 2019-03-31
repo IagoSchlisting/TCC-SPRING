@@ -34,7 +34,7 @@
             <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel panel-orange panel-widget border-right">
                     <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-                        <div><a href="/add-edit-pedido" class="large"><span class="glyphicon glyphicon-plus"></span></a></div>
+                        <div><a href="/add-pedido" class="large"><span class="glyphicon glyphicon-plus"></span></a></div>
                         <div class="text-muted" style="margin-top: 12px"><span style="color:#a1491e"> Adicionar novo Pedido </span></div>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 package com.castel.models;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -23,7 +25,6 @@ public class Endereco {
     private Integer numero;
 
     @OneToMany(mappedBy = "endereco")
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
     private List<Pedido> pedidos;
 
     public Integer getId() {

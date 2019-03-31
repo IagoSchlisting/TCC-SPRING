@@ -1,4 +1,5 @@
 package com.castel.controllers;
+import com.castel.models.Pedido;
 import com.castel.models.Role;
 import com.castel.models.User;
 import com.castel.service.BebidaService;
@@ -103,11 +104,6 @@ public class HomeController extends BaseController {
     public String bancoDeBebidasPage(Model model){
         model.addAttribute("bebidas", this.bebidaService.listBebidas());
         return "banco-de-bebidas";
-    }
-
-    @RequestMapping(value = "/add-edit-pedido" , method = RequestMethod.GET)
-    public String AdicionarEditarPedidoPage(Model model){
-        return "add-edit-pedido";
     }
 
     @RequestMapping(value = "/add-pizza" , method = RequestMethod.GET)

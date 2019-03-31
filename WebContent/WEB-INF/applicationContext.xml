@@ -39,4 +39,11 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+
+    <bean name="pedidoService" class="com.castel.service.impl.PedidoServiceImp">
+    </bean>
+    <bean name="pedidoDao" class="com.castel.dao.impl.PedidoDaoImp">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
 </beans>

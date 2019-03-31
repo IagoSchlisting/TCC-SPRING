@@ -20,7 +20,6 @@ public class Sabor {
     private String sabor;
 
     @OneToMany(mappedBy = "sabor")
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
     private List<SaborPizza> saborespizza;
 
     private Boolean especial;
