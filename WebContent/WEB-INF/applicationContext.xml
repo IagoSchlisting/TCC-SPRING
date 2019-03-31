@@ -33,4 +33,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean name="valoresService" class="com.castel.service.impl.ValoresServiceImp">
+    </bean>
+    <bean name="valoresDao" class="com.castel.dao.impl.ValoresDaoImp">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
 </beans>

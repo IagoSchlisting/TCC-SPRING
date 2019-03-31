@@ -82,7 +82,8 @@ public class HomeController extends BaseController {
     }
 
     @RequestMapping(value = "/administracao-valores" , method = RequestMethod.GET)
-    public String administracaoDeValoresPage(){
+    public String administracaoDeValoresPage(Model model){
+        model.addAttribute("valoresAdicionais", this.valoresService.getValoresById(4));
         return "administracao-valores";
     }
 
@@ -120,8 +121,6 @@ public class HomeController extends BaseController {
         model.addAttribute("bebidas", this.bebidaService.listBebidas());
         return "add-bebida";
     }
-
-
 
 
 

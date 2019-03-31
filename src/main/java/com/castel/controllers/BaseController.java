@@ -1,6 +1,7 @@
 package com.castel.controllers;
 import com.castel.models.User;
 import com.castel.service.UserService;
+import com.castel.service.ValoresService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,10 @@ public class BaseController {
 
     @Resource
     protected UserService userService;
+
+    @Resource
+    protected ValoresService valoresService;
+
 
     /**
      * Get current session user

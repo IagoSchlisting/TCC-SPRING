@@ -30,15 +30,21 @@ public class ValoresAdicionais {
 
     private Double valorEspecialBroto1;
 
+    private Double valorEspecialBroto2;
+
     private Double valorEspecialMedia1;
 
     private Double valorEspecialMedia2;
+
+    private Double valorEspecialMedia3;
 
     private Double valorEspecialGrande1;
 
     private Double valorEspecialGrande2;
 
     private Double valorEspecialGrande3;
+
+    private Double valorEspecialGrande4;
 
     private Double valorEspecialGigante1;
 
@@ -120,6 +126,14 @@ public class ValoresAdicionais {
         this.valorEspecialBroto1 = valorEspecialBroto1;
     }
 
+    public Double getValorEspecialBroto2() {
+        return valorEspecialBroto2;
+    }
+
+    public void setValorEspecialBroto2(Double valorEspecialBroto2) {
+        this.valorEspecialBroto2 = valorEspecialBroto2;
+    }
+
     public Double getValorEspecialMedia1() {
         return valorEspecialMedia1;
     }
@@ -134,6 +148,14 @@ public class ValoresAdicionais {
 
     public void setValorEspecialMedia2(Double valorEspecialMedia2) {
         this.valorEspecialMedia2 = valorEspecialMedia2;
+    }
+
+    public Double getValorEspecialMedia3() {
+        return valorEspecialMedia3;
+    }
+
+    public void setValorEspecialMedia3(Double valorEspecialMedia3) {
+        this.valorEspecialMedia3 = valorEspecialMedia3;
     }
 
     public Double getValorEspecialGrande1() {
@@ -158,6 +180,14 @@ public class ValoresAdicionais {
 
     public void setValorEspecialGrande3(Double valorEspecialGrande3) {
         this.valorEspecialGrande3 = valorEspecialGrande3;
+    }
+
+    public Double getValorEspecialGrande4() {
+        return valorEspecialGrande4;
+    }
+
+    public void setValorEspecialGrande4(Double valorEspecialGrande4) {
+        this.valorEspecialGrande4 = valorEspecialGrande4;
     }
 
     public Double getValorEspecialGigante1() {

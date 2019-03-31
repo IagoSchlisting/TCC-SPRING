@@ -107,19 +107,18 @@
             }
 
             if(this.value == "grande"){
-                $(".sabor").prop("disabled", false);
-                $("#sabor4").prop("disabled", true);
+                $(".sabor").prop("disabled", false);;
 
             }
 
             if(this.value == "media"){
                 $(".sabor").prop("disabled", false);
-                $("#sabor3").prop("disabled", true);
                 $("#sabor4").prop("disabled", true);
             }
             if(this.value == "broto"){
-                $(".sabor").prop("disabled", true);
-                $("#sabor1").prop("disabled", false);
+                $(".sabor").prop("disabled", false);
+                $("#sabor3").prop("disabled", true);
+                $("#sabor4").prop("disabled", true);
             }
 
 
