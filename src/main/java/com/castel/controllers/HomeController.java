@@ -83,7 +83,7 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/administracao-valores" , method = RequestMethod.GET)
     public String administracaoDeValoresPage(Model model){
-        model.addAttribute("valoresAdicionais", this.valoresService.getValoresById(4));
+        model.addAttribute("valoresAdicionais", this.valoresService.getFirstLine());
         return "administracao-valores";
     }
 

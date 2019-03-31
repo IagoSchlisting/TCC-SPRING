@@ -20,4 +20,5 @@ public class ValoresServiceImp implements ValoresService {
     public ValoresAdicionais getValoresById(int id){
         return valoresDao.getValoresById(id);
     }
+    public ValoresAdicionais getFirstLine(){ return valoresDao.getFirstLine();}
 }

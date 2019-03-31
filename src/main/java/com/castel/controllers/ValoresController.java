@@ -26,18 +26,23 @@ public class ValoresController extends BaseController {
             valoresAdicionais.setValorBordaGrande(6.00);
             valoresAdicionais.setValorBordaGigante(13.00);
             valoresAdicionais.setValorTeleEntrega(5.00);
+
+
             valoresAdicionais.setValorEspecialBroto1(20.00);
             valoresAdicionais.setValorEspecialBroto2(10.00);
+
             valoresAdicionais.setValorEspecialMedia1(27.00);
-            valoresAdicionais.setValorEspecialMedia2(18.00);
+            valoresAdicionais.setValorEspecialMedia2(13.00);
             valoresAdicionais.setValorEspecialMedia3(9.00);
+
             valoresAdicionais.setValorEspecialGrande1(48.00);
-            valoresAdicionais.setValorEspecialGrande2(36.00);
-            valoresAdicionais.setValorEspecialGrande3(24.00);
+            valoresAdicionais.setValorEspecialGrande2(24.00);
+            valoresAdicionais.setValorEspecialGrande3(16.00);
             valoresAdicionais.setValorEspecialGrande4(12.00);
+
             valoresAdicionais.setValorEspecialGigante1(72.00);
-            valoresAdicionais.setValorEspecialGigante2(54.00);
-            valoresAdicionais.setValorEspecialGigante3(36.00);
+            valoresAdicionais.setValorEspecialGigante2(36.00);
+            valoresAdicionais.setValorEspecialGigante3(24.00);
             valoresAdicionais.setValorEspecialGigante4(18.00);
             this.valoresService.addValores(valoresAdicionais);
 
@@ -52,7 +57,7 @@ public class ValoresController extends BaseController {
     @RequestMapping(value = "/valores/update", method = RequestMethod.POST)
     public RedirectView atualizaValores(RedirectAttributes redirectAttributes, ValoresAdicionais valoresAdicionais){
         try {
-            valoresAdicionais.setId(4);
+            valoresAdicionais.setId(this.valoresService.getFirstLine().getId());
             this.valoresService.updateValores(valoresAdicionais);
             redirectAttributes.addFlashAttribute("msg", "Valores atualizados com sucesso!");
         }catch (Exception e){
