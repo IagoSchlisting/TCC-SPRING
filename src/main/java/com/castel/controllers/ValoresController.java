@@ -51,7 +51,7 @@ public class ValoresController extends BaseController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 
-        return new RedirectView("/administracao-valores");
+        return new RedirectView("/login");
     }
 
     @RequestMapping(value = "/valores/update", method = RequestMethod.POST)

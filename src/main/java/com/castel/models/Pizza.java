@@ -19,16 +19,13 @@ public class Pizza {
     @Enumerated(EnumType.ORDINAL)
     private TamanhoPizza tamanhoPizza;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "Pizza_Sabores",
-//            joinColumns = { @JoinColumn(name = "PIZZA_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "SABORPIZZA_ID") }
-//    )
-//    private List<SaborPizza> sabores;
-
-    @OneToMany(mappedBy = "pizza")
-    private List<SaborPizza> saborespizza;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Pizza_Sabores",
+            joinColumns = { @JoinColumn(name = "PIZZA_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "SABOR_ID") }
+    )
+    private List<Sabor> sabores;
 
     private boolean comborda;
 
@@ -51,14 +48,6 @@ public class Pizza {
         this.tamanhoPizza = tamanhoPizza;
     }
 
-//    public List<SaborPizza> getSabores() {
-//        return sabores;
-//    }
-//
-//    public void setSabores(List<SaborPizza> sabores) {
-//        this.sabores = sabores;
-//    }
-
     public boolean isComborda() {
         return comborda;
     }
@@ -67,12 +56,11 @@ public class Pizza {
         this.comborda = comborda;
     }
 
-//    public List<Item> getItens() {
-//        return itens;
-//    }
-//
-//    public void setItens(List<Item> itens) {
-//        this.itens = itens;
-//    }
+    public List<Sabor> getSabores() {
+        return sabores;
+    }
 
+    public void setSabores(List<Sabor> sabores) {
+        this.sabores = sabores;
+    }
 }

@@ -14,62 +14,38 @@
                     <th>  </th>
                 </tr>
 
-                <tr>
-                    <td> 1234552 </td>
-                    <td> Pizza Gigante </td>
-                    <td> R$80,00 </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ações <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"> Ver Detalhes </a></li>
-                                <li><a href="#"> Editar </a></li>
-                                <li><a href="#"> Excluir </a></li>
-                            </ul>
-                        </div>
-                    </td>
+                <c:forEach var="item" items="${pedido.itens}">
+                    <tr>
+                        <td> ${item.id} </td>
+                        <td>
+                            <c:if test="${item.ispizza}">
+                                Pizza ${item.pizza.tamanhoPizza}
 
-                </tr>
+                                <c:if test="${item.pizza.comborda}">
+                                    c/borda.
+                                </c:if>
+                            </c:if>
 
-                <tr>
-                    <td> 1234552 </td>
-                    <td> Pizza Gigante </td>
-                    <td> R$80,00 </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ações <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"> Ver Detalhes </a></li>
-                                <li><a href="#"> Editar </a></li>
-                                <li><a href="#"> Excluir </a></li>
-                            </ul>
-                        </div>
-                    </td>
+                            <c:if test="${not item.ispizza}">
+                                ${item.bebida.bebida}
+                            </c:if>
+                        </td>
+                        <td> ${item.valor} </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ações <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"> Ver Detalhes </a></li>
+                                    <li><a href="/remove/item/${item.id}"> Excluir </a></li>
+                                </ul>
+                            </div>
+                        </td>
 
-                </tr>
+                    </tr>
+                </c:forEach>
 
-                <tr>
-                    <td> 1234552 </td>
-                    <td> Pizza Gigante </td>
-                    <td> R$80,00 </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ações <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"> Ver Detalhes </a></li>
-                                <li><a href="#"> Editar </a></li>
-                                <li><a href="#"> Excluir </a></li>
-                            </ul>
-                        </div>
-                    </td>
-
-                </tr>
                 <tr>
                     <td colspan="4" align="center">
                         <a href="/pizza/add/${pedido.id}" class="btn btn-default" style="width: 400px"> Adicionar Pizza </a>
