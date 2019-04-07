@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,19 +24,21 @@ public class Pedido {
     @Enumerated(EnumType.ORDINAL)
     private StatusPedido statusPedido;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @OneToMany(mappedBy = "pedido")
+    private List<Item> itens;
+
+    private LocalDate start;
+
+    private LocalDate end;
 
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "ENDERECO_ID")
 //    private Endereco endereco;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
-    private User user;
-//
-//    private Double valorTotal;
-//
-    @OneToMany(mappedBy = "pedido")
-    private List<Item> itens;
 //
 //    @Enumerated(EnumType.ORDINAL)
 //    private TipoPagamento tipoPagamento;
@@ -69,47 +72,7 @@ public class Pedido {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-//
-//    public Endereco getEndereco() {
-//        return endereco;
-//    }
-//
-//    public void setEndereco(Endereco endereco) {
-//        this.endereco = endereco;
-//    }
-//
-//    public Double getValorTotal() {
-//        return valorTotal;
-//    }
-//
-//    public void setValorTotal(Double valorTotal) {
-//        this.valorTotal = valorTotal;
-//    }
-//
-//    public TipoPagamento getTipoPagamento() {
-//        return tipoPagamento;
-//    }
-//
-//    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-//        this.tipoPagamento = tipoPagamento;
-//    }
-//
-//    public Bandeira getBandeira() {
-//        return bandeira;
-//    }
-//
-//    public void setBandeira(Bandeira bandeira) {
-//        this.bandeira = bandeira;
-//    }
-//
-//    public Double getTroco() {
-//        return troco;
-//    }
-//
-//    public void setTroco(Double troco) {
-//        this.troco = troco;
-//    }
-//
+
     public List<Item> getItens() {
         return itens;
     }

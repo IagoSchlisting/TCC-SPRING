@@ -60,17 +60,40 @@ public class PedidoController extends BaseController {
         return "add-bebida";
     }
 
+    @RequestMapping(value = "/pedido/bebida/add" , method = RequestMethod.POST)
+    public RedirectView AdicionarBebidaAction(WebRequest request, RedirectAttributes redirectAttributes){
+
+        int pedido_id = Integer.parseInt(request.getParameter("pedido_id"));
+        int bebida_id = Integer.parseInt(request.getParameter("bebida"));
+        int quantidade = Integer.parseInt(request.getParameter("quantidade"));
+        Bebida bebida = this.bebidaService.getBebidaById(bebida_id);
+
+        try{
+            for(int i=0;i<quantidade; i++){
+                Item item = new Item();
+                item.setPedido(this.pedidoService.getPedidoById(pedido_id));
+                item.setIspizza(false);
+                item.setBebida(bebida);
+                item.setValor(bebida.getValor());
+                this.pedidoService.addItem(item);
+            }
+            redirectAttributes.addFlashAttribute("msg", "Bebida adicionada com sucesso.");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return new RedirectView("/pedido/add");
+    }
 
     @RequestMapping(value = "/pizza/add" , method = RequestMethod.POST)
     public RedirectView AdicionarPizzaAction(WebRequest request, RedirectAttributes redirectAttributes){
 
+        int pedido_id = Integer.parseInt(request.getParameter("pedido_id"));
         TamanhoPizza tamanhopizza = TamanhoPizza.valueOf(request.getParameter("tamanhopizza"));
         boolean borda = request.getParameter("borda") != null ? true : false;
         int sabor1 = Integer.parseInt(request.getParameter("sabor1"));
         int sabor2 = Integer.parseInt(request.getParameter("sabor2"));
         int sabor3 = Integer.parseInt(request.getParameter("sabor3"));
         int sabor4 = Integer.parseInt(request.getParameter("sabor4"));
-        int pedido_id = Integer.parseInt(request.getParameter("pedido_id"));
 
         try{
             List<Sabor> sabores = new ArrayList<>();
