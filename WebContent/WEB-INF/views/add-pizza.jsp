@@ -44,16 +44,45 @@
 
             <div class="col-md-6">
                 <div class="form-check">
-                    <label for="sabor2"> Sabor 2 </label>
-                    <select class="form-control sabor" name="sabor2" id="sabor2">
-                        <option value="0" selected="selected"> Selecione um Sabor </option>
-                        <c:forEach var="sabor" items="${sabores}">
-                            <option value="${sabor.id}"> ${sabor.sabor} </option>
-                        </c:forEach>
+                    <label for="tamanhosabor1"> Tamanho Sabor 1 </label>
+                    <select class="form-control sabor" name="tamanhosabor1" id="tamanhosabor1">
+                        <option value="0" selected="selected"> Selecione um tamanho </option>
+                            <option value="1"> 100% da pizza </option>
+                            <option value="2"> 1/2 da pizza </option>
+                            <option value="3"> 1/3 da pizza </option>
+                            <option value="4"> 1/4 da pizza </option>
                     </select>
                 </div>
             </div>
         </div>
+
+            <div class="col-md-12" style="margin-top: 20px">
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <label for="sabor2"> Sabor 2 </label>
+                        <select class="form-control sabor" name="sabor2" id="sabor2">
+                            <option value="0" selected="selected"> Selecione um Sabor </option>
+                            <c:forEach var="sabor" items="${sabores}">
+                                <option value="${sabor.id}"> ${sabor.sabor} </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <label for="tamanhosabor2"> Tamanho Sabor 2 </label>
+                        <select class="form-control sabor" name="tamanhosabor2" id="tamanhosabor2">
+                            <option value="0" selected="selected"> Selecione um tamanho </option>
+                            <option value="1"> 100% da pizza </option>
+                            <option value="2"> 1/2 da pizza </option>
+                            <option value="3"> 1/3 da pizza </option>
+                            <option value="4"> 1/4 da pizza </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
         <div class="col-md-12" style="margin-top: 20px">
 
@@ -71,17 +100,47 @@
 
             <div class="col-md-6">
                 <div class="form-check">
-                    <label for="sabor4"> Sabor 4 </label>
-                    <select class="form-control sabor" name="sabor4" id="sabor4">
-                        <option value="0" selected="selected"> Selecione um Sabor </option>
-                        <c:forEach var="sabor" items="${sabores}">
-                            <option value="${sabor.id}"> ${sabor.sabor} </option>
-                        </c:forEach>
+                    <label for="tamanhosabor3"> Tamanho Sabor 3 </label>
+                    <select class="form-control sabor" name="tamanhosabor3" id="tamanhosabor3">
+                        <option value="0" selected="selected"> Selecione um tamanho </option>
+                        <option value="1"> 100% da pizza </option>
+                        <option value="2"> 1/2 da pizza </option>
+                        <option value="3"> 1/3 da pizza </option>
+                        <option value="4"> 1/4 da pizza </option>
                     </select>
                 </div>
             </div>
 
         </div>
+
+            <div class="col-md-12" style="margin-top: 20px">
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <label for="sabor4"> Sabor 4 </label>
+                        <select class="form-control sabor" name="sabor4" id="sabor4">
+                            <option value="0" selected="selected"> Selecione um Sabor </option>
+                            <c:forEach var="sabor" items="${sabores}">
+                                <option value="${sabor.id}"> ${sabor.sabor} </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <label for="tamanhosabor4"> Tamanho Sabor 4 </label>
+                        <select class="form-control sabor" name="tamanhosabor4" id="tamanhosabor4">
+                            <option value="0" selected="selected"> Selecione um tamanho </option>
+                            <option value="1"> 100% da pizza </option>
+                            <option value="2"> 1/2 da pizza </option>
+                            <option value="3"> 1/3 da pizza </option>
+                            <option value="4"> 1/4 da pizza </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
             <a href="/pedido/add" class="btn btn-danger" style="width: 100%"> Cancelar </a>

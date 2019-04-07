@@ -22,8 +22,9 @@ public class SaborPizza {
     @JoinColumn(name = "SABOR_ID")
     private Sabor sabor;
 
-    @ManyToMany(mappedBy = "sabores", fetch = FetchType.EAGER)
-    private List<Pizza> pizzas;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PIZZA_ID")
+    private Pizza pizza;
 
     public Integer getId() {
         return id;
@@ -50,11 +51,12 @@ public class SaborPizza {
         this.sabor = sabor;
     }
 
-    public List<Pizza> getPizzas() {
-        return pizzas;
+
+    public Pizza getPizza() {
+        return pizza;
     }
 
-    public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
+    public void setPizza(Pizza pizza) {
+        this.pizza = pizza;
     }
 }

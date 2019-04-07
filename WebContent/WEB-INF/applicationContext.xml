@@ -33,6 +33,12 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean name="pizzaService" class="com.castel.service.impl.PizzaServiceImp">
+    </bean>
+    <bean name="pizzaDao" class="com.castel.dao.impl.PizzaDaoImp">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <bean name="valoresService" class="com.castel.service.impl.ValoresServiceImp">
     </bean>
     <bean name="valoresDao" class="com.castel.dao.impl.ValoresDaoImp">

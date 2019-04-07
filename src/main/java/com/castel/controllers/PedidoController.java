@@ -64,10 +64,10 @@ public class PedidoController extends BaseController {
     @RequestMapping(value = "/pizza/add" , method = RequestMethod.POST)
     public RedirectView AdicionarPizzaAction(WebRequest request, RedirectAttributes redirectAttributes){
 
-        String tamanhopizza = request.getParameter("tamanhopizza");
-        String borda = request.getParameter("borda");
-        int sabor1 = Integer.parseInt(request.getParameter("sabor1"));
         int sabor2 = Integer.parseInt(request.getParameter("sabor2"));
+        TamanhoPizza tamanhopizza = TamanhoPizza.valueOf(request.getParameter("tamanhopizza"));
+        boolean borda = request.getParameter("borda").equals(1) ? true : false;
+        int sabor1 = Integer.parseInt(request.getParameter("sabor1"));
         int sabor3 = Integer.parseInt(request.getParameter("sabor3"));
         int sabor4 = Integer.parseInt(request.getParameter("sabor4"));
 
