@@ -22,7 +22,6 @@ public class Bebida {
     private Double valor;
 
     @OneToMany(mappedBy = "bebida")
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
     private List<Item> itens;
 
     public Integer getId() {

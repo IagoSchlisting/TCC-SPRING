@@ -37,7 +37,7 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
     }
     @Override
     public Pedido findLastOrderFromUser(int user_id){
-        List<Pedido> pedidos = (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido where PEDIDO_ID = (select max(PEDIDO_ID) from com.castel.models.Pedido) and not USER_ID = " + user_id);
+        List<Pedido> pedidos = (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido where USER_ID = " + user_id + "ORDER BY PEDIDO_ID DESC");
         return pedidos.get(0);
     }
 

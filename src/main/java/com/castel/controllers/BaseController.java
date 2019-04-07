@@ -1,5 +1,7 @@
 package com.castel.controllers;
 import com.castel.models.User;
+import com.castel.service.BebidaService;
+import com.castel.service.SaborService;
 import com.castel.service.UserService;
 import com.castel.service.ValoresService;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,11 @@ public class BaseController {
     @Resource
     protected ValoresService valoresService;
 
+    @Resource
+    protected SaborService saborService;
+
+    @Resource
+    protected BebidaService bebidaService;
 
     /**
      * Get current session user

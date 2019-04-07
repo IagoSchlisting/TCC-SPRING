@@ -22,13 +22,6 @@ import java.util.List;
 public class HomeController extends BaseController {
 
 
-    @Resource
-    private SaborService saborService;
-
-    @Resource
-    private BebidaService bebidaService;
-
-
     /**
      * Verify if user is from owner or member type and redirects accordingly
      * @param model
@@ -105,20 +98,6 @@ public class HomeController extends BaseController {
         model.addAttribute("bebidas", this.bebidaService.listBebidas());
         return "banco-de-bebidas";
     }
-
-    @RequestMapping(value = "/add-pizza" , method = RequestMethod.GET)
-    public String AdicionarPizzaPage(Model model){
-        model.addAttribute("sabores", this.saborService.listSabores());
-        return "add-pizza";
-    }
-
-    @RequestMapping(value = "/add-bebida" , method = RequestMethod.GET)
-    public String AdicionarBebidaPage(Model model){
-        model.addAttribute("bebidas", this.bebidaService.listBebidas());
-        return "add-bebida";
-    }
-
-
 
     /**
      * Redirects to 403 page

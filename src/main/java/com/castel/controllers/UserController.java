@@ -208,7 +208,6 @@ public class UserController extends BaseController{
         user.setPassword(passwordEncoder().encode("123"));
         user.setRoles(roles);
         userService.addUser(user);
-
         return new RedirectView("/login");
     }
 

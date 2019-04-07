@@ -24,8 +24,8 @@ public class Endereco {
 
     private Integer numero;
 
-    @OneToMany(mappedBy = "endereco")
-    private List<Pedido> pedidos;
+//    @OneToMany(mappedBy = "endereco")
+//    private List<Pedido> pedidos;
 
     public Integer getId() {
         return id;
@@ -58,12 +58,12 @@ public class Endereco {
     public void setNumero(Integer numero) {
         this.numero = numero;
     }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
+//
+//    public List<Pedido> getPedidos() {
+//        return pedidos;
+//    }
+//
+//    public void setPedidos(List<Pedido> pedidos) {
+//        this.pedidos = pedidos;
+//    }
 }

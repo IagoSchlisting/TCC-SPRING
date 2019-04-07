@@ -1,6 +1,7 @@
 <%@ include file="templates/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%@ include file="templates/messages.jsp"%>
 
 <div class="panel panel-default">
     <div class="panel-heading">  ${type} pedido número ${pedido.id} </div>
@@ -71,8 +72,8 @@
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
-                        <a href="add-pizza" class="btn btn-default" style="width: 400px"> Adicionar Pizza </a>
-                        <a href="add-bebida" class="btn btn-default" style="width: 400px"> Adicionar Bebida </a>
+                        <a href="/pizza/add/${pedido.id}" class="btn btn-default" style="width: 400px"> Adicionar Pizza </a>
+                        <a href="/bebida/add/${pedido.id}" class="btn btn-default" style="width: 400px"> Adicionar Bebida </a>
                     </td>
                 </tr>
 

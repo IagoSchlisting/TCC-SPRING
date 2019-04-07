@@ -30,7 +30,6 @@ public class Pizza {
     private boolean comborda;
 
     @OneToMany(mappedBy = "pizza")
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
     private List<Item> itens;
 
     public Integer getId() {

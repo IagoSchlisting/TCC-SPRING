@@ -1,8 +1,6 @@
 package com.castel.models;
 
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -22,30 +20,30 @@ public class Pedido {
 
     private String telefone;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ENDERECO_ID")
-    private Endereco endereco;
+    @Enumerated(EnumType.ORDINAL)
+    private StatusPedido statusPedido;
+
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "ENDERECO_ID")
+//    private Endereco endereco;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
-
-    private Double valorTotal;
-
-    @OneToMany(mappedBy = "pedido")
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
-    private List<Item> itens;
-
-    @Enumerated(EnumType.ORDINAL)
-    private TipoPagamento tipoPagamento;
-
-    @Enumerated(EnumType.ORDINAL)
-    private Bandeira bandeira;
-
-    @Enumerated(EnumType.ORDINAL)
-    private StatusPedido statusPedido;
-
-    private Double troco;
+//
+//    private Double valorTotal;
+//
+//    @OneToMany(mappedBy = "pedido")
+//    private List<Item> itens;
+//
+//    @Enumerated(EnumType.ORDINAL)
+//    private TipoPagamento tipoPagamento;
+//
+//    @Enumerated(EnumType.ORDINAL)
+//    private Bandeira bandeira;
+//
+//    private Double troco;
 
 
     public Integer getId() {
@@ -71,53 +69,62 @@ public class Pedido {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+//
+//    public Endereco getEndereco() {
+//        return endereco;
+//    }
+//
+//    public void setEndereco(Endereco endereco) {
+//        this.endereco = endereco;
+//    }
+//
+//    public Double getValorTotal() {
+//        return valorTotal;
+//    }
+//
+//    public void setValorTotal(Double valorTotal) {
+//        this.valorTotal = valorTotal;
+//    }
+//
+//    public TipoPagamento getTipoPagamento() {
+//        return tipoPagamento;
+//    }
+//
+//    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+//        this.tipoPagamento = tipoPagamento;
+//    }
+//
+//    public Bandeira getBandeira() {
+//        return bandeira;
+//    }
+//
+//    public void setBandeira(Bandeira bandeira) {
+//        this.bandeira = bandeira;
+//    }
+//
+//    public Double getTroco() {
+//        return troco;
+//    }
+//
+//    public void setTroco(Double troco) {
+//        this.troco = troco;
+//    }
+//
+//    public List<Item> getItens() {
+//        return itens;
+//    }
+//
+//    public void setItens(List<Item> itens) {
+//        this.itens = itens;
+//    }
 
-    public Endereco getEndereco() {
-        return endereco;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
-    }
-
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
-    }
-
-    public Bandeira getBandeira() {
-        return bandeira;
-    }
-
-    public void setBandeira(Bandeira bandeira) {
-        this.bandeira = bandeira;
-    }
-
-    public Double getTroco() {
-        return troco;
-    }
-
-    public void setTroco(Double troco) {
-        this.troco = troco;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public StatusPedido getStatusPedido() {
@@ -126,13 +133,5 @@ public class Pedido {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

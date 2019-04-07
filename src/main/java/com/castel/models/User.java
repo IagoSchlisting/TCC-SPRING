@@ -34,10 +34,6 @@ public class User {
     )
     private List<Role> roles;
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
-    private List<Pedido> pedidos;
-
     public Integer getId() {
         return id;
     }
@@ -78,11 +74,4 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
 }

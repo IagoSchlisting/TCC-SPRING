@@ -1,7 +1,7 @@
 <%@ include file="templates/header.jsp"%>
 
 <div class="panel panel-default">
-    <div class="panel-heading"> Adicione uma bebida </div>
+    <div class="panel-heading"> Adicionando uma bebida ao pedido ${id} </div>
     <div class="panel-body">
 
         <div class="col-md-8">
