@@ -34,8 +34,8 @@ public class Pedido {
 //
 //    private Double valorTotal;
 //
-//    @OneToMany(mappedBy = "pedido")
-//    private List<Item> itens;
+    @OneToMany(mappedBy = "pedido")
+    private List<Item> itens;
 //
 //    @Enumerated(EnumType.ORDINAL)
 //    private TipoPagamento tipoPagamento;
@@ -110,13 +110,13 @@ public class Pedido {
 //        this.troco = troco;
 //    }
 //
-//    public List<Item> getItens() {
-//        return itens;
-//    }
-//
-//    public void setItens(List<Item> itens) {
-//        this.itens = itens;
-//    }
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
 
 
     public User getUser() {

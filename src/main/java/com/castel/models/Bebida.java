@@ -20,9 +20,9 @@ public class Bebida {
     private String bebida;
 
     private Double valor;
-
-    @OneToMany(mappedBy = "bebida")
-    private List<Item> itens;
+//
+//    @OneToMany(mappedBy = "bebida")
+//    private List<Item> itens;
 
     public Integer getId() {
         return id;
@@ -47,12 +47,12 @@ public class Bebida {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
-    }
+//
+//    public List<Item> getItens() {
+//        return itens;
+//    }
+//
+//    public void setItens(List<Item> itens) {
+//        this.itens = itens;
+//    }
 }

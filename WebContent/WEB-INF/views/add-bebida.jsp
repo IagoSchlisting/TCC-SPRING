@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
-            <a href="/add-edit-pedido" class="btn btn-danger" style="width: 100%"> Cancelar </a>
+            <a href="/pedido/add" class="btn btn-danger" style="width: 100%"> Cancelar </a>
         </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">

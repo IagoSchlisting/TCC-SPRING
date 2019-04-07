@@ -29,8 +29,8 @@ public class Pizza {
 
     private boolean comborda;
 
-    @OneToMany(mappedBy = "pizza")
-    private List<Item> itens;
+//    @OneToMany(mappedBy = "pizza")
+//    private List<Item> itens;
 
     public Integer getId() {
         return id;
@@ -64,11 +64,11 @@ public class Pizza {
         this.comborda = comborda;
     }
 
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
-    }
+//    public List<Item> getItens() {
+//        return itens;
+//    }
+//
+//    public void setItens(List<Item> itens) {
+//        this.itens = itens;
+//    }
 }

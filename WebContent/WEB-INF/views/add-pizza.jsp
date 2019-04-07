@@ -3,7 +3,7 @@
 <div class="panel panel-default">
     <div class="panel-heading"> Adicionando uma pizza ao pedido ${id} </div>
     <div class="panel-body">
-
+        <form:form id="pizzaitem" action="/pizza/add" name="pizza" method="post">
         <div class="col-md-12">
             <div class="col-md-8">
                 <div class="form-group">
@@ -20,7 +20,7 @@
 
             <div class="col-md-4">
                 <div class="form-check" style="margin: 30px">
-                    <input class="form-check-input" type="checkbox" value="1" id="borda">
+                    <input class="form-check-input" type="checkbox" name="borda" value="1" id="borda">
                     <label class="form-check-label" for="borda">
                         Com borda
                     </label>
@@ -84,13 +84,14 @@
         </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
-            <a href="/add-edit-pedido" class="btn btn-danger" style="width: 100%"> Cancelar </a>
+            <a href="/pedido/add" class="btn btn-danger" style="width: 100%"> Cancelar </a>
         </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
-            <button class="btn btn-primary" style="width: 100%"> Adicionar Pizza </button>
+            <button type="submit" lass="btn btn-primary" style="width: 100%"> Adicionar Pizza </button>
         </div>
-
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        </form:form>
 
     </div>
     <div class="panel-footer"> @POC/SPRING - Iago Machado </div>

@@ -1,6 +1,7 @@
 package com.castel.dao.impl;
 
 import com.castel.dao.PedidoDao;
+import com.castel.models.Item;
 import com.castel.models.Pedido;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,15 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
     @Override
     public Pedido findLastOrderFromUser(int user_id){
         List<Pedido> pedidos = (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido where USER_ID = " + user_id + "ORDER BY PEDIDO_ID DESC");
-        return pedidos.get(0);
+        return pedidos.isEmpty() ? null : pedidos.get(0);
     }
+    @Override
+    public Item getItemById(int id){ return this.getHibernateTemplate().get(Item.class, id);}
+    @Override
+    @Transactional
+    public void addItem(Item item) { this.getHibernateTemplate().save(item);}
+    @Override
+    @Transactional
+    public void removeItem(int id){ this.getHibernateTemplate().delete(this.getItemById(id));}
 
 }
