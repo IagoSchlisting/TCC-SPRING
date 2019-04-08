@@ -107,7 +107,7 @@
                 <label for="totalvalue">Valor Total</label>
                 <div class="input-group">
                     <span class="input-group-addon">R$</span>
-                    <input type="number" value="1000" min="1" step="any" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="totalvalue" disabled="disabled"/>
+                    <input type="number" value="${pedido.valorTotal}" min="1" step="any" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="totalvalue" disabled="disabled"/>
                 </div>
             </div>
         </div>

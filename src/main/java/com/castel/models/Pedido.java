@@ -1,8 +1,5 @@
 package com.castel.models;
-
-import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,6 +31,8 @@ public class Pedido {
     private LocalDate start;
 
     private LocalDate end;
+
+    private Double valorTotal;
 
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "ENDERECO_ID")
@@ -96,5 +95,29 @@ public class Pedido {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
+    }
+
+    public LocalDate getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDate start) {
+        this.start = start;
+    }
+
+    public LocalDate getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDate end) {
+        this.end = end;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 }

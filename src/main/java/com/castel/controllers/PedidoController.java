@@ -36,6 +36,7 @@ public class PedidoController extends BaseController {
                 Pedido pedido = new Pedido();
                 pedido.setUser(this.getPrincipalUser());
                 pedido.setStatusPedido(StatusPedido.EM_CRIACAO);
+                pedido.setValorTotal(0.0);
                 this.pedidoService.addPedido(pedido);
             }catch (Exception e){
                 model.addAttribute("error", e.getMessage());
@@ -67,6 +68,7 @@ public class PedidoController extends BaseController {
         int bebida_id = Integer.parseInt(request.getParameter("bebida"));
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         Bebida bebida = this.bebidaService.getBebidaById(bebida_id);
+        Pedido pedido;
 
         try{
             for(int i=0;i<quantidade; i++){
@@ -76,6 +78,11 @@ public class PedidoController extends BaseController {
                 item.setBebida(bebida);
                 item.setValor(bebida.getValor());
                 this.pedidoService.addItem(item);
+
+                pedido = this.pedidoService.getPedidoById(pedido_id);
+                Double valorAtualizado = pedido.getValorTotal() + bebida.getValor();
+                pedido.setValorTotal(valorAtualizado);
+                this.pedidoService.updatePedido(pedido);
             }
             redirectAttributes.addFlashAttribute("msg", "Bebida adicionada com sucesso.");
         }catch (Exception e){
@@ -114,6 +121,12 @@ public class PedidoController extends BaseController {
             item.setValor(this.calculateValorPizza(pizza));
             item.setPedido(this.pedidoService.getPedidoById(pedido_id));
             this.pedidoService.addItem(item);
+
+            Pedido pedido = this.pedidoService.getPedidoById(pedido_id);
+            Double valorAtualizado = pedido.getValorTotal() + this.calculateValorPizza(pizza);
+            pedido.setValorTotal(valorAtualizado);
+            this.pedidoService.updatePedido(pedido);
+
             redirectAttributes.addFlashAttribute("msg", "Pizza adicionada com sucesso!");
 
         }catch (Exception e){
