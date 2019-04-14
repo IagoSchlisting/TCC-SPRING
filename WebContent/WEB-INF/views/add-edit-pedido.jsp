@@ -201,18 +201,18 @@
     <script>
 
         $(document)
-            .on("change", "#formaDepagamento", function(){
-                if(this.value == "0"){
+            .on("change", "#tipoPagamento", function(){
+                if(this.value == "CARTAO"){
                     $("#bandeira-div").css("display", "block");
                     $("#troco-div").css("display", "none");
                 }
-                if(this.value == "1"){
+                if(this.value == "DINHEIRO"){
                     $("#bandeira-div").css("display", "none");
                     $("#troco-div").css("display", "block");
                 }
             })
-            .on("change", "#tipopedido",function(){
-                if(this.value == "tele"){
+            .on("change", "#tipoPedido",function(){
+                if(this.value == "TELE"){
                     $(".endereco").prop("disabled", false);
                 }else{
                     $(".endereco").prop("disabled", true);

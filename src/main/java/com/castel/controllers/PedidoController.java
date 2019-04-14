@@ -21,9 +21,6 @@ import java.util.List;
 public class PedidoController extends BaseController {
 
     @Resource
-    private PedidoService pedidoService;
-
-    @Resource
     private PizzaService pizzaService;
 
     @RequestMapping(value = "/pedido/add" , method = RequestMethod.GET)
@@ -268,13 +265,7 @@ public class PedidoController extends BaseController {
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
         TipoPedido tipoPedido = TipoPedido.valueOf(request.getParameter("tipoPedido"));
-        String bairro = request.getParameter("bairro");
-        String rua = request.getParameter("rua");
-        int numero = Integer.parseInt(request.getParameter("numero"));
         TipoPagamento tipoPagamento = TipoPagamento.valueOf(request.getParameter("tipoPagamento"));
-        Bandeira bandeira = Bandeira.valueOf(request.getParameter("bandeira"));
-        Double troco = Double.parseDouble(request.getParameter("troco"));
-
 
         try {
 
@@ -285,6 +276,11 @@ public class PedidoController extends BaseController {
 
             if(tipoPedido == TipoPedido.TELE)
             {
+
+                String bairro = request.getParameter("bairro");
+                String rua = request.getParameter("rua");
+                int numero = Integer.parseInt(request.getParameter("numero"));
+
                 Endereco endereco = new Endereco();
                 endereco.setBairro(bairro);
                 endereco.setRua(rua);
@@ -295,9 +291,11 @@ public class PedidoController extends BaseController {
 
             pedido.setTipoPagamento(tipoPagamento);
             if(tipoPagamento == TipoPagamento.CARTAO){
+                Bandeira bandeira = Bandeira.valueOf(request.getParameter("bandeira"));
                 pedido.setBandeira(bandeira);
             }
             if(tipoPagamento == TipoPagamento.DINHEIRO){
+                Double troco = Double.parseDouble(request.getParameter("troco"));
                 pedido.setTroco(troco);
             }
 

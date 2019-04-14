@@ -25,8 +25,8 @@ public class PedidoServiceImp implements PedidoService {
     }
 
     @Override
-    public List<Pedido> listPedidos(int pedido_id) {
-        return this.pedidoDao.listPedidos(pedido_id);
+    public List<Pedido> listPedidos() {
+        return this.pedidoDao.listPedidos();
     }
 
     @Override

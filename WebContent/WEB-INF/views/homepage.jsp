@@ -4,7 +4,7 @@
 <%@ include file="templates/messages.jsp"%>
 
 <div class="panel panel-default">
-    <div class="panel-heading"> Controle de Pedidos do dia [ ${data-hoje} ] </div>
+    <div class="panel-heading"> Controle de Pedidos do dia [ ${data_hoje} ] </div>
     <div class="panel-body">
 
         <div class="row">
@@ -55,101 +55,42 @@
                 <th>  </th>
             </tr>
 
+            <c:forEach var="pedido" items="${pedidos}">
+                <tr>
+                    <td> ${pedido.id}</td>
+                    <td> ${pedido.nomeCliente} </td>
+                    <td> ${pedido.telefone} </td>
+                    <td> ${pedido.start.format(formatter)} </td>
+                    <td>
+
+                        <c:if test="${pedido.tipoPedido.equals(tele)}">
+                            Rua ${pedido.endereco.rua}, Bairro ${pedido.endereco.bairro}, Nº ${pedido.endereco.numero}
+                        </c:if>
+
+                        <c:if test="${not pedido.tipoPedido.equals(tele)}">
+                            <span style="color: indigo">${pedido.tipoPedido}</span>
+                        </c:if>
+
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ações <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/confirma/pedido/${pedido.id}"> Confirmar Pagamento </a></li>
+                                <li><a href="/reimprimir/pedido/${pedido.id}"> Reimprimir</a></li>
+                                <li><a href="/editar/pedido/${pedido.id}"> Editar Pedido</a></li>
+                                <li><a href="/problema/pedido/${pedido.id}" data-toggle="modal" data-target="#exampleModalCenter"> Relatar Problema </a></li>
+                                <li role="separator" class="divider"></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
             <%--<tr>--%>
                 <%--<td colspan="5" align="center">  <span style="color:#5b5959">Nenhum pedido em produção no momento.</span> </td>--%>
             <%--</tr>--%>
-
-            <tr>
-                <td> 23</td>
-                <td> user teste</td>
-                <td> 7327317237 </td>
-                <td> 19:30 </td>
-                <td> Rua das testeiras, Igara, 50 </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ações <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"> Confirmar Pagamento </a></li>
-                            <li><a href="#"> Reimprimir</a></li>
-                            <li><a href="#"> Editar Pedido</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#exampleModalCenter"> Relatar Problema </a></li>
-                            <li role="separator" class="divider"></li>
-                            <li style="background-color: #eb8c8c"><a href="#"> Excluir </a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td> 23</td>
-                <td> user teste</td>
-                <td> 7327317237 </td>
-                <td> 19:30 </td>
-                <td> Rua das testeiras, Igara, 50 </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ações <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"> Confirmar Pagamento </a></li>
-                            <li><a href="#"> Reimprimir</a></li>
-                            <li><a href="#"> Editar Pedido</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#exampleModalCenter"> Relatar Problema </a></li>
-                            <li role="separator" class="divider"></li>
-                            <li style="background-color: #eb8c8c"><a href="#"> Excluir </a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td> 23</td>
-                <td> user teste</td>
-                <td> 7327317237 </td>
-                <td> 19:30 </td>
-                <td> Rua das testeiras, Igara, 50 </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ações <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"> Confirmar Pagamento </a></li>
-                            <li><a href="#"> Reimprimir</a></li>
-                            <li><a href="#"> Editar Pedido</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#exampleModalCenter"> Relatar Problema </a></li>
-                            <li role="separator" class="divider"></li>
-                            <li style="background-color: #eb8c8c"><a href="#"> Excluir </a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td> 23</td>
-                <td> user teste</td>
-                <td> 7327317237 </td>
-                <td> 19:30 </td>
-                <td> Rua das testeiras, Igara, 50 </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ações <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"> Confirmar Pagamento </a></li>
-                            <li><a href="#"> Reimprimir</a></li>
-                            <li><a href="#"> Editar Pedido</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#exampleModalCenter"> Relatar Problema </a></li>
-                            <li role="separator" class="divider"></li>
-                            <li style="background-color: #eb8c8c"><a href="#"> Excluir </a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
         </table>
     </div>
 

@@ -25,9 +25,10 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
         this.getHibernateTemplate().update(pedido);
     }
     @Override
-    public List<Pedido> listPedidos(int pedido_id){
+    public List<Pedido> listPedidos(){
         return (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido");
     }
+
     @Override
     public Pedido getPedidoById(int id){
         return this.getHibernateTemplate().get(Pedido.class, id);

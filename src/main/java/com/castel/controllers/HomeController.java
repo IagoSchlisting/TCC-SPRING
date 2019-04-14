@@ -1,7 +1,5 @@
 package com.castel.controllers;
-import com.castel.models.Pedido;
-import com.castel.models.Role;
-import com.castel.models.User;
+import com.castel.models.*;
 import com.castel.service.BebidaService;
 import com.castel.service.SaborService;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -38,10 +37,19 @@ public class HomeController extends BaseController {
             if(new String(role.getRole()).equals("ROLE_OWNER") || new String(role.getRole()).equals("ROLE_USER")){
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
-                model.addAttribute("data-hoje", formatter.format(date));
+                DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                dateformatter = DateTimeFormatter.ofPattern("HH:mm");
+
+
+                model.addAttribute("data_hoje", formatter.format(date));
+                model.addAttribute("pedidos", this.pedidoService.listPedidos());
+                model.addAttribute("formatter", dateformatter);
+                model.addAttribute("tele", TipoPedido.TELE);
+
                 return "homepage";
             }
         }
+
         return "login";
     }
 

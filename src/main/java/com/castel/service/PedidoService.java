@@ -20,7 +20,7 @@ public interface PedidoService {
 
     public Pedido findLastOrderFromUser(int user_id);
     public void updatePedido(Pedido pedido);
-    public List<Pedido> listPedidos(int pedido_id);
+    public List<Pedido> listPedidos();
     public Pedido getPedidoById(int id);
     public void removePedido(int id);
 
