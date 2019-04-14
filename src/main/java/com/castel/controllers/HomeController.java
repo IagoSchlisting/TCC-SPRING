@@ -38,7 +38,7 @@ public class HomeController extends BaseController {
             if(new String(role.getRole()).equals("ROLE_OWNER") || new String(role.getRole()).equals("ROLE_USER")){
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
-                model.addAttribute("diaatual", formatter.format(date));
+                model.addAttribute("data-hoje", formatter.format(date));
                 return "homepage";
             }
         }

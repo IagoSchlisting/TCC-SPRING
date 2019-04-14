@@ -208,6 +208,36 @@ public class UserController extends BaseController{
         user.setPassword(passwordEncoder().encode("123"));
         user.setRoles(roles);
         userService.addUser(user);
+
+
+        Sabor sabor1 = new Sabor();
+        sabor1.setSabor("Marguerita");
+        sabor1.setEspecial(false);
+
+        Sabor sabor2 = new Sabor();
+        sabor2.setSabor("Calabreza");
+        sabor2.setEspecial(false);
+
+        Sabor sabor3 = new Sabor();
+        sabor3.setSabor("Camarao");
+        sabor3.setEspecial(true);
+
+        Sabor sabor4 = new Sabor();
+        sabor4.setSabor("Milho");
+        sabor4.setEspecial(false);
+
+        this.saborService.addSabor(sabor1);
+        this.saborService.addSabor(sabor2);
+        this.saborService.addSabor(sabor3);
+        this.saborService.addSabor(sabor4);
+
+
+        Bebida bebida = new Bebida();
+        bebida.setBebida("Coca-Cola 2L");
+        bebida.setValor(6.0);
+        this.bebidaService.addBebida(bebida);
+
+
         return new RedirectView("/registravalores");
     }
 

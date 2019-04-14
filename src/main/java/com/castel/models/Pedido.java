@@ -1,7 +1,9 @@
 package com.castel.models;
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,26 +28,29 @@ public class Pedido {
     private User user;
 
     @OneToMany(mappedBy = "pedido")
+    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
     private List<Item> itens;
 
-    private LocalDate start;
+    private LocalDateTime start;
 
-    private LocalDate end;
+    private LocalDateTime end;
 
     private Double valorTotal;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "ENDERECO_ID")
-//    private Endereco endereco;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ENDERECO_ID")
+    private Endereco endereco;
 
-//
-//    @Enumerated(EnumType.ORDINAL)
-//    private TipoPagamento tipoPagamento;
-//
-//    @Enumerated(EnumType.ORDINAL)
-//    private Bandeira bandeira;
-//
-//    private Double troco;
+    @Enumerated(EnumType.ORDINAL)
+    private TipoPagamento tipoPagamento;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Bandeira bandeira;
+
+    @Enumerated(EnumType.ORDINAL)
+    private TipoPedido tipoPedido;
+
+    private Double troco;
 
 
     public Integer getId() {
@@ -97,19 +102,19 @@ public class Pedido {
         this.statusPedido = statusPedido;
     }
 
-    public LocalDate getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalDate start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public LocalDate getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(LocalDate end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
@@ -119,5 +124,46 @@ public class Pedido {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
+    }
+
+    public Bandeira getBandeira() {
+        return bandeira;
+    }
+
+    public void setBandeira(Bandeira bandeira) {
+        this.bandeira = bandeira;
+    }
+
+    public TipoPedido getTipoPedido() {
+        return tipoPedido;
+    }
+
+    public void setTipoPedido(TipoPedido tipoPedido) {
+        this.tipoPedido = tipoPedido;
+    }
+
+    public Double getTroco() {
+        return troco;
+    }
+
+    public void setTroco(Double troco) {
+        this.troco = troco;
     }
 }

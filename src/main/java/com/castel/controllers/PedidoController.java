@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,6 +232,85 @@ public class PedidoController extends BaseController {
                 break;
         }
         return valorTotal;
+    }
+
+    @RequestMapping(value = "/remove/item/{id}" , method = RequestMethod.GET)
+    public RedirectView removeItem(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+
+        try{
+
+            Item item = this.pedidoService.getItemById(id);
+            Pedido pedido = item.getPedido();
+
+            if(pedido.getValorTotal() - item.getValor() < 1){
+                pedido.setValorTotal(0.0);
+            }else{
+                pedido.setValorTotal(pedido.getValorTotal() - item.getValor());
+            }
+
+            this.pedidoService.updatePedido(pedido);
+            this.pedidoService.removeItem(id);
+
+            redirectAttributes.addFlashAttribute("msg", "Item removido com sucesso.");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
+        return new RedirectView("/pedido/add");
+    }
+
+
+
+    @RequestMapping(value = "/finaliza/pedido" , method = RequestMethod.POST)
+    public RedirectView finalizaPedido(WebRequest request, RedirectAttributes redirectAttributes){
+
+        int pedido_id = Integer.parseInt(request.getParameter("pedido_id"));
+        String nome = request.getParameter("nome");
+        String telefone = request.getParameter("telefone");
+        TipoPedido tipoPedido = TipoPedido.valueOf(request.getParameter("tipoPedido"));
+        String bairro = request.getParameter("bairro");
+        String rua = request.getParameter("rua");
+        int numero = Integer.parseInt(request.getParameter("numero"));
+        TipoPagamento tipoPagamento = TipoPagamento.valueOf(request.getParameter("tipoPagamento"));
+        Bandeira bandeira = Bandeira.valueOf(request.getParameter("bandeira"));
+        Double troco = Double.parseDouble(request.getParameter("troco"));
+
+
+        try {
+
+            Pedido pedido = this.pedidoService.getPedidoById(pedido_id);
+            pedido.setNomeCliente(nome);
+            pedido.setTelefone(telefone);
+            pedido.setTipoPedido(tipoPedido);
+
+            if(tipoPedido == TipoPedido.TELE)
+            {
+                Endereco endereco = new Endereco();
+                endereco.setBairro(bairro);
+                endereco.setRua(rua);
+                endereco.setNumero(numero);
+                this.pedidoService.addEndereco(endereco);
+                pedido.setEndereco(endereco);
+            }
+
+            pedido.setTipoPagamento(tipoPagamento);
+            if(tipoPagamento == TipoPagamento.CARTAO){
+                pedido.setBandeira(bandeira);
+            }
+            if(tipoPagamento == TipoPagamento.DINHEIRO){
+                pedido.setTroco(troco);
+            }
+
+            pedido.setStart(LocalDateTime.now());
+            pedido.setStatusPedido(StatusPedido.EM_PRODUCAO);
+            this.pedidoService.updatePedido(pedido);
+
+            redirectAttributes.addFlashAttribute("msg", "Pedido finalizado com sucesso!");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
+        return new RedirectView("/");
     }
 
 }

@@ -1,9 +1,10 @@
 <%@ include file="templates/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%@ include file="templates/messages.jsp"%>
 
 <div class="panel panel-default">
-    <div class="panel-heading"> Controle de Pedidos do dia [ ${diaatual} ] </div>
+    <div class="panel-heading"> Controle de Pedidos do dia [ ${data-hoje} ] </div>
     <div class="panel-body">
 
         <div class="row">

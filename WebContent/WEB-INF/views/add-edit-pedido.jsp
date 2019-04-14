@@ -32,15 +32,48 @@
                         </td>
                         <td> ${item.valor} </td>
                         <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Ações <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#"> Ver Detalhes </a></li>
-                                    <li><a href="/remove/item/${item.id}"> Excluir </a></li>
-                                </ul>
-                            </div>
+                            <a href="/remove/item/${item.id}" class="btn btn-danger"> Excluir </a>
+
+                            <c:if test="${item.ispizza}">
+                                <button class="btn btn-default" data-toggle="modal" data-target="#modal_${item.id}"> Ver Detalhes </button>
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal_${item.id}" tabindex="-1" role="dialog" aria-labelledby="modal_${item.id}lLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLabel" style="color:dimgrey"> PIZZA ${item.pizza.tamanhoPizza} ${item.pizza.comborda ? "C/BORDA" : ""} </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <th>Sabor</th>
+                                                        <th>Tipo</th>
+                                                    </tr>
+
+                                                <c:forEach var="sabor" items="${item.pizza.sabores}">
+                                                    <tr>
+                                                        <td>${sabor.sabor}</td>
+                                                        <td style="color: ${sabor.especial ? "green" : ""}"> ${sabor.especial ? "Especial" : "Normal"} </td>
+                                                    </tr>
+                                                </c:forEach>
+
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+
                         </td>
 
                     </tr>
@@ -55,49 +88,51 @@
 
             </table>
 
+        <form:form id="finalizapedido" action="/finaliza/pedido" name="finalizapedido" method="post">
+            <input type="hidden" name="pedido_id" id="pedido_id" value="${pedido.id}">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="nomecli"> Nome do Cliente </label>
-                <input type="text" class="form-control" name="nomecli" id="nomecli">
+                <label for="nome"> Nome do Cliente </label>
+                <input type="text" class="form-control" name="nome" id="nome">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="telcli"> Telefone </label>
-                <input type="number" class="form-control" name="telcli" id="telcli">
+                <label for="telefone"> Telefone </label>
+                <input type="number" class="form-control" name="telefone" id="telefone">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="tipopedido"> Tipo de Pedido </label>
-                <select class="form-control" name="tipopedido" id="tipopedido">
-                    <option value="tele">Tele-Entrega</option>
-                    <option value="balcao">Balcão</option>
-                    <option value="salao">Salão</option>
+                <label for="tipoPedido"> Tipo de Pedido </label>
+                <select class="form-control" name="tipoPedido" id="tipoPedido">
+                    <option value="TELE">Tele-Entrega</option>
+                    <option value="BALCAO">Balcão</option>
+                    <option value="SALAO">Salão</option>
                 </select>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="bairrocli"> Bairro </label>
-                <input type="text" class="form-control endereco" name="bairrocli" id="bairrocli">
+                <label for="bairro"> Bairro </label>
+                <input type="text" class="form-control endereco" name="bairro" id="bairro">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="ruacli"> Rua </label>
-                <input type="text" class="form-control endereco" name="ruacli" id="ruacli">
+                <label for="rua"> Rua </label>
+                <input type="text" class="form-control endereco" name="rua" id="rua">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="numerocli"> Nº </label>
-                <input type="number" class="form-control endereco" name="numerocli" id="numerocli">
+                <label for="numero"> Nº </label>
+                <input type="number" class="form-control endereco" name="numero" id="numero">
             </div>
         </div>
 
@@ -107,48 +142,29 @@
                 <label for="totalvalue">Valor Total</label>
                 <div class="input-group">
                     <span class="input-group-addon">R$</span>
-                    <input type="number" value="${pedido.valorTotal}" min="1" step="any" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="totalvalue" disabled="disabled"/>
+                    <input type="number" value="${pedido.valorTotal}" min="0.00" step="0.01" max="10000.00" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="totalvalue" disabled="disabled"/>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group">
-                <label for="formaDepagamento"> Forma de Pagamento </label>
-                <select class="form-control" name="formaDepagamento" id="formaDepagamento">
-                    <option value="0"> Cartão </option>
-                    <option value="1"> Dinheiro </option>
+                <label for="tipoPagamento"> Forma de Pagamento </label>
+                <select class="form-control" name="tipoPagamento" id="tipoPagamento">
+                    <option value="CARTAO"> Cartão </option>
+                    <option value="DINHEIRO"> Dinheiro </option>
                 </select>
             </div>
         </div>
-
-        <%--<div class="col-md-6">--%>
-            <%--<div id="bandeira-div">--%>
-                <%--<div class="form-group">--%>
-                    <%--<label for="bandeira"> Bandeira </label>--%>
-                    <%--<select class="form-control" name="bandeira" id="bandeira">--%>
-                        <%--<option value="0"> Mastercard </option>--%>
-                        <%--<option value="1">  Visa </option>--%>
-                    <%--</select>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div id="troco-div" style="display: none">--%>
-                <%--<label for="troco">Troco necessário</label>--%>
-                <%--<div class="input-group">--%>
-                    <%--<span class="input-group-addon">R$</span>--%>
-                    <%--<input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="troco" />--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
 
         <div class="col-md-6" id="bandeira-div">
             <div class="form-group">
                 <label for="bandeira"> Bandeira </label>
                 <select class="form-control" name="bandeira" id="bandeira">
-                    <option value="0"> Mastercard </option>
-                    <option value="1">  Visa </option>
+                    <option value="NONE" selected="selected"> Selecione a Bandeira</option>
+                    <option value="MASTERCARD"> Mastercard </option>
+                    <option value="VISA">  Visa </option>
+                    <option value="ALELO">  Alelo </option>
                 </select>
             </div>
         </div>
@@ -158,19 +174,21 @@
                 <label for="troco">Troco necessário</label>
                 <div class="input-group">
                     <span class="input-group-addon">R$</span>
-                    <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="troco" />
+                    <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="troco" name="troco"/>
                 </div>
             </div>
         </div>
 
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
-            <a href="/" class="btn btn-danger" style="width: 100%"> Cancelar Pedido </a>
+            <a href="/" class="btn btn-danger" style="width: 100%"> Voltar  </a>
         </div>
 
         <div class="col-md-6" style="margin-top: 20px;" align="right">
-            <button class="btn btn-success" style="width: 100%"> Finalizar Pedido </button>
+            <button type="submit" class="btn btn-success" style="width: 100%"> Finalizar Pedido </button>
         </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        </form:form>
 
     </div>
     <div class="panel-footer"> @TCC/SPRING - Iago Machado </div>

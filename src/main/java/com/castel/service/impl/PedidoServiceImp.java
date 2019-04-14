@@ -1,6 +1,7 @@
 package com.castel.service.impl;
 
 import com.castel.dao.PedidoDao;
+import com.castel.models.Endereco;
 import com.castel.models.Item;
 import com.castel.models.Pedido;
 import com.castel.service.PedidoService;
@@ -49,5 +50,12 @@ public class PedidoServiceImp implements PedidoService {
     public void removeItem(int id){ this.pedidoDao.removeItem(id);}
     @Override
     public Item getItemById(int id){return this.pedidoDao.getItemById(id);}
+
+    @Override
+    public void addEndereco(Endereco endereco){ this.pedidoDao.addEndereco(endereco);}
+    @Override
+    public void removeEndereco(int id){ this.pedidoDao.removeEndereco(id);}
+    @Override
+    public Endereco getEnderecoById(int id){ return this.pedidoDao.getEnderecoById(id);}
 
 }
