@@ -48,16 +48,20 @@
         <table class="table table-striped">
             <tr>
                 <th> Cód. </th>
+                <th> Func. </th>
                 <th> Nome </th>
                 <th> Telefone </th>
                 <th> Horário </th>
                 <th> Endereço </th>
+                <th> Pagamento </th>
+                <th> Total </th>
                 <th>  </th>
             </tr>
 
             <c:forEach var="pedido" items="${pedidos}">
                 <tr>
                     <td> ${pedido.id}</td>
+                    <td> ${pedido.user.id}</td>
                     <td> ${pedido.nomeCliente} </td>
                     <td> ${pedido.telefone} </td>
                     <td> ${pedido.start.format(formatter)} </td>
@@ -68,10 +72,19 @@
                         </c:if>
 
                         <c:if test="${not pedido.tipoPedido.equals(tele)}">
-                            <span style="color: indigo">${pedido.tipoPedido}</span>
+                            [ ${pedido.tipoPedido} ]
                         </c:if>
 
                     </td>
+                    <td>
+                        <c:if test="${pedido.tipoPagamento.equals(cartao)}">
+                            Cartão / ${pedido.bandeira}
+                        </c:if>
+                        <c:if test="${not pedido.tipoPagamento.equals(cartao)}">
+                            Dinheiro / Troco - R$${pedido.troco}
+                        </c:if>
+                    </td>
+                    <td> R$${pedido.valorTotal} </td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

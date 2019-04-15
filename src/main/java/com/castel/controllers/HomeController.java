@@ -45,6 +45,7 @@ public class HomeController extends BaseController {
                 model.addAttribute("pedidos", this.pedidoService.listPedidos());
                 model.addAttribute("formatter", dateformatter);
                 model.addAttribute("tele", TipoPedido.TELE);
+                model.addAttribute("cartao", TipoPagamento.CARTAO);
 
                 return "homepage";
             }
