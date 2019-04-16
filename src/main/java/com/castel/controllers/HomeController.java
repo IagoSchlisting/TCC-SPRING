@@ -35,18 +35,21 @@ public class HomeController extends BaseController {
 
         for (Role role: principal.getRoles()){
             if(new String(role.getRole()).equals("ROLE_OWNER") || new String(role.getRole()).equals("ROLE_USER")){
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat(  "dd/MM/yyyy");
                 Date date = new Date();
                 DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 dateformatter = DateTimeFormatter.ofPattern("HH:mm");
 
 
                 model.addAttribute("data_hoje", formatter.format(date));
-                model.addAttribute("pedidos", this.pedidoService.listPedidos());
+                model.addAttribute("pedidos", this.pedidoService.listPedidosHome());
                 model.addAttribute("formatter", dateformatter);
                 model.addAttribute("tele", TipoPedido.TELE);
                 model.addAttribute("cartao", TipoPagamento.CARTAO);
 
+                model.addAttribute("total_pedidos", this.pedidoService.getTotalPedidosDoDia());
+                model.addAttribute("total_pedidos_producao", this.pedidoService.getTotalPedidosEmProducao());
+                model.addAttribute("total_pedidos_confirmados", this.pedidoService.getTotalPedidosConfirmados());
                 return "homepage";
             }
         }

@@ -19,10 +19,14 @@ public interface PedidoDao {
     public void removeEndereco(int id);
     public Endereco getEnderecoById(int id);
 
-    public List<Pedido> listPedidos();
+    public List<Pedido> listPedidosHome();
     public Pedido getPedidoById(int id);
     public void removePedido(int id);
     public Pedido findLastOrderFromUser(int user_id);
+
+    public Integer getTotalPedidosDoDia();
+    public Integer getTotalPedidosEmProducao();
+    public Integer getTotalPedidosConfirmados();
 
 }
 

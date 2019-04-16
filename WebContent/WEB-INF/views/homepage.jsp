@@ -11,7 +11,7 @@
             <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel panel-teal panel-widget border-right">
                     <div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
-                        <div class="large">120</div>
+                        <div class="large">${total_pedidos}</div>
                         <div class="text-muted"> <span style="color:#586ea5">Total de Pedidos </span></div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
             <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel panel-blue panel-widget border-right">
                     <div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
-                        <div class="large">52</div>
+                        <div class="large">${total_pedidos_confirmados}</div>
                         <div class="text-muted"> <span style="color:#59b564">Finalizados </span></div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
             <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel panel-orange panel-widget border-right">
                     <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-                        <div class="large">24</div>
+                        <div class="large">${total_pedidos_producao}</div>
                         <div class="text-muted"><span style="color:#a7a04b"> Em Produção </span></div>
                     </div>
                 </div>

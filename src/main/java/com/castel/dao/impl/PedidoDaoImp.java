@@ -4,15 +4,17 @@ import com.castel.dao.PedidoDao;
 import com.castel.models.Endereco;
 import com.castel.models.Item;
 import com.castel.models.Pedido;
+import com.castel.models.StatusPedido;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
-
-
 
     @Override
     @Transactional
@@ -25,8 +27,8 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
         this.getHibernateTemplate().update(pedido);
     }
     @Override
-    public List<Pedido> listPedidos(){
-        return (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido");
+    public List<Pedido> listPedidosHome(){
+        return (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido p where STATUSPEDIDO = " + 3 + " and START LIKE '%"+LocalDate.now()+"%'");
     }
 
     @Override
@@ -60,6 +62,29 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
     public void removeEndereco(int id){ this.getHibernateTemplate().delete(getEnderecoById(id));}
     @Override
     public Endereco getEnderecoById(int id){ return this.getHibernateTemplate().get(Endereco.class, id);}
+
+
+    @Override
+    @Transactional
+    public Integer getTotalPedidosDoDia(){
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = (Query) session.createQuery("SELECT COUNT(*) FROM com.castel.models.Pedido WHERE START LIKE '%"+LocalDate.now()+"%'");
+        return Integer.valueOf(query.getResultList().get(0).toString());
+    }
+    @Override
+    @Transactional
+    public Integer getTotalPedidosEmProducao(){
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = (Query) session.createQuery("SELECT COUNT(*) FROM com.castel.models.Pedido WHERE STATUSPEDIDO = " + 3 + " and START LIKE '%"+LocalDate.now()+"%'");
+        return Integer.valueOf(query.getResultList().get(0).toString());
+    }
+    @Override
+    @Transactional
+    public Integer getTotalPedidosConfirmados(){
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = (Query) session.createQuery("SELECT COUNT(*) FROM com.castel.models.Pedido WHERE STATUSPEDIDO = " + 4 + " and START LIKE '%"+LocalDate.now()+"%'");
+        return Integer.valueOf(query.getResultList().get(0).toString());
+    }
 
 
 

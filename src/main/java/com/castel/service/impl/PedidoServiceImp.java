@@ -25,8 +25,8 @@ public class PedidoServiceImp implements PedidoService {
     }
 
     @Override
-    public List<Pedido> listPedidos() {
-        return this.pedidoDao.listPedidos();
+    public List<Pedido> listPedidosHome() {
+        return this.pedidoDao.listPedidosHome();
     }
 
     @Override
@@ -57,5 +57,19 @@ public class PedidoServiceImp implements PedidoService {
     public void removeEndereco(int id){ this.pedidoDao.removeEndereco(id);}
     @Override
     public Endereco getEnderecoById(int id){ return this.pedidoDao.getEnderecoById(id);}
+
+
+    @Override
+    public Integer getTotalPedidosDoDia(){
+        return this.pedidoDao.getTotalPedidosDoDia();
+    }
+    @Override
+    public Integer getTotalPedidosEmProducao(){
+        return this.pedidoDao.getTotalPedidosEmProducao();
+    }
+    @Override
+    public Integer getTotalPedidosConfirmados(){
+        return this.pedidoDao.getTotalPedidosConfirmados();
+    }
 
 }
