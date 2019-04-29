@@ -52,6 +52,8 @@ public class Pedido {
 
     private Double troco;
 
+    @OneToOne(mappedBy = "pedido")
+    private Problema problema;
 
     public Integer getId() {
         return id;
@@ -165,5 +167,13 @@ public class Pedido {
 
     public void setTroco(Double troco) {
         this.troco = troco;
+    }
+
+    public Problema getProblema() {
+        return problema;
+    }
+
+    public void setProblema(Problema problema) {
+        this.problema = problema;
     }
 }

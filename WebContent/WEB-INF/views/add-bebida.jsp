@@ -21,7 +21,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="quantidade"> Quantidade </label>
-                <input class="form-control" type="number" name="quantidade" id="quantidade" value="1">
+                <input class="form-control" type="number" max="10" name="quantidade" id="quantidade" value="1">
             </div>
         </div>
 

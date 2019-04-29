@@ -1,10 +1,7 @@
 package com.castel.dao.impl;
 
 import com.castel.dao.PedidoDao;
-import com.castel.models.Endereco;
-import com.castel.models.Item;
-import com.castel.models.Pedido;
-import com.castel.models.StatusPedido;
+import com.castel.models.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -12,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
@@ -86,6 +84,21 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
         return Integer.valueOf(query.getResultList().get(0).toString());
     }
 
+    @Override
+    @Transactional
+    public void addProblem(Problema problema){
+        this.getHibernateTemplate().save(problema);
+    }
+
+    @Override
+    public Problema getProblemByPedidoId(int pedido_id){
+        List<Problema> problemas = (List<Problema>) this.getHibernateTemplate().find("from com.castel.models.Problema where PEDIDO_ID = " + pedido_id);
+        return problemas.isEmpty() ? null : problemas.get(0);
+    }
+    @Override
+    public List<Pedido> listPedidosByStatus(int status_id, String filter){
+        return (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido where START LIKE '%"+filter+"%' AND STATUSPEDIDO = " + status_id);
+    }
 
 
 }

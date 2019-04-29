@@ -311,4 +311,35 @@ public class PedidoController extends BaseController {
         return new RedirectView("/");
     }
 
+    @RequestMapping(value = "/confirma/pedido/{id}" , method = RequestMethod.GET)
+    public RedirectView confirmaPedido(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        Pedido pedido = this.pedidoService.getPedidoById(id);
+        try{
+            pedido.setStatusPedido(StatusPedido.CONFIRMADO);
+            pedido.setEnd(LocalDateTime.now());
+            redirectAttributes.addFlashAttribute("msg", "Pedido confirmado com sucesso.");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        this.pedidoService.updatePedido(pedido);
+        return new RedirectView("/");
+    }
+
+    @RequestMapping(value = "/pedido/add/problema", method = RequestMethod.POST)
+    public  RedirectView addProblemaPedido(WebRequest request, RedirectAttributes redirectAttributes){
+        String descricao_problema = request.getParameter("problemadesc");
+        Problema problema = new Problema();
+        Pedido pedido = this.pedidoService.getPedidoById(Integer.parseInt(request.getParameter("pedido_id")));
+        pedido.setStatusPedido(StatusPedido.PROBLEMA);
+        pedido.setEnd(LocalDateTime.now());
+
+        try{
+            this.pedidoService.updatePedido(pedido);
+            problema.setDescricao(descricao_problema);
+            problema.setPedido(pedido);
+            this.pedidoService.addProblem(problema);
+        }catch(Exception e){ redirectAttributes.addFlashAttribute("error", e.getMessage());}
+        return new RedirectView("/");
+    }
+
 }

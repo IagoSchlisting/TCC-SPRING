@@ -50,8 +50,8 @@
             <li class="dropdown">
                 <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Relatórios <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/relpedidos"> Pedidos </a></li>
-                    <li><a href="/relproblemas"> Problemas </a></li>
+                    <li><a href="/relatorio/pedidos"> Pedidos </a></li>
+                    <li><a href="/relatorio/problemas"> Problemas </a></li>
                 </ul>
             </li>
         </ul>

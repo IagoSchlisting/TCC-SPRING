@@ -1,12 +1,11 @@
 package com.castel.service.impl;
 
 import com.castel.dao.PedidoDao;
-import com.castel.models.Endereco;
-import com.castel.models.Item;
-import com.castel.models.Pedido;
+import com.castel.models.*;
 import com.castel.service.PedidoService;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PedidoServiceImp implements PedidoService {
@@ -72,4 +71,17 @@ public class PedidoServiceImp implements PedidoService {
         return this.pedidoDao.getTotalPedidosConfirmados();
     }
 
+    @Override
+    public void addProblem(Problema problema){
+        this.pedidoDao.addProblem(problema);
+    }
+    @Override
+    public Problema getProblemByPedidoId(int pedido_id){
+        return this.pedidoDao.getProblemByPedidoId(pedido_id);
+    }
+
+    @Override
+    public List<Pedido> listPedidosByStatus(int status_id, String filter){
+        return this.pedidoDao.listPedidosByStatus(status_id, filter);
+    }
 }

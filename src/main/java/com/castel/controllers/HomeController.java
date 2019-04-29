@@ -1,17 +1,13 @@
 package com.castel.controllers;
 import com.castel.models.*;
-import com.castel.service.BebidaService;
-import com.castel.service.SaborService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -77,15 +73,64 @@ public class HomeController extends BaseController {
         return "login";
     }
 
-    @RequestMapping(value = "/relpedidos" , method = RequestMethod.GET)
-    public String relatorioDePedidosPage(){
-        return "relpedidos";
+    @RequestMapping(value = "/relatorio/{type}" , method = RequestMethod.GET)
+    public String relatoriosPage(@PathVariable("type") String type, Model model){
+        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        dateformatter = DateTimeFormatter.ofPattern("HH:mm");
+        int status_id;
+
+        if(type.equals("pedidos")) { status_id = 4; }
+        else {
+            model.addAttribute("problema", true);
+            status_id = 5;
+        }
+
+        model.addAttribute("pedidos", this.pedidoService.listPedidosByStatus(status_id,""));
+        model.addAttribute("formatter", dateformatter);
+        model.addAttribute("tele", TipoPedido.TELE);
+        model.addAttribute("cartao", TipoPagamento.CARTAO);
+        return "relatorios";
     }
 
-    @RequestMapping(value = "/relproblemas" , method = RequestMethod.GET)
-    public String relatorioDeProblemasPage(){
-        return "relproblemas";
+
+
+    @RequestMapping(value = "/filtro/relatorio" , method = RequestMethod.GET)
+    public String relatoriosPageFiltro(Model model, WebRequest request){
+
+        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        dateformatter = DateTimeFormatter.ofPattern("HH:mm");
+        int status_id;
+
+        if(request.getParameter("problema").equals("true")){
+            status_id = 5;
+        }else{
+            status_id = 4;
+        }
+
+        String filtro_dia = request.getParameter("filtro_dia");
+        String filtro_mes = request.getParameter("filtro_mes");
+        String filtro_ano = request.getParameter("filtro_ano");
+
+        String filter;
+        List<Pedido> pedidos;
+
+        if(filtro_mes.equals("0")){
+            pedidos = this.pedidoService.listPedidosByStatus(status_id, filtro_dia);
+        }else{
+            filter = filtro_ano + "-" + filtro_mes;
+            pedidos = this.pedidoService.listPedidosByStatus(status_id, filter);
+        }
+
+        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("formatter", dateformatter);
+        model.addAttribute("tele", TipoPedido.TELE);
+        model.addAttribute("cartao", TipoPagamento.CARTAO);
+
+        return "relatorios";
     }
+
+
+
 
     @RequestMapping(value = "/administracao-valores" , method = RequestMethod.GET)
     public String administracaoDeValoresPage(Model model){

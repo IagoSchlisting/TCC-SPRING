@@ -48,7 +48,6 @@
         <table class="table table-striped">
             <tr>
                 <th> Cód. </th>
-                <th> Func. </th>
                 <th> Nome </th>
                 <th> Telefone </th>
                 <th> Horário </th>
@@ -61,7 +60,6 @@
             <c:forEach var="pedido" items="${pedidos}">
                 <tr>
                     <td> ${pedido.id}</td>
-                    <td> ${pedido.user.id}</td>
                     <td> ${pedido.nomeCliente} </td>
                     <td> ${pedido.telefone} </td>
                     <td> ${pedido.start.format(formatter)} </td>
@@ -94,7 +92,7 @@
                                 <li><a href="/confirma/pedido/${pedido.id}"> Confirmar Pagamento </a></li>
                                 <li><a href="/reimprimir/pedido/${pedido.id}"> Reimprimir</a></li>
                                 <li><a href="/editar/pedido/${pedido.id}"> Editar Pedido</a></li>
-                                <li><a href="/problema/pedido/${pedido.id}" data-toggle="modal" data-target="#exampleModalCenter"> Relatar Problema </a></li>
+                                <li><a href="" data_pedido="${pedido.id}" data-toggle="modal" data-target="#modalCenter" class="problem_link"> Relatar Problema </a></li>
                                 <li role="separator" class="divider"></li>
                             </ul>
                         </div>
@@ -108,7 +106,7 @@
     </div>
 
         <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -118,14 +116,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                <form:form id="problemacontrol" action="/pedido/add/problema" name="problema" method="post">
+                    <input type="hidden" name="pedido_id" id="pedido_id_modal"/>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1"> Relate o problema do pedido <span style="color: red"> [23] </span> </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="problemadesc"> Relate o problema do pedido <span style="color: red" id="pedido_id_span"> </span> </label>
+                        <textarea class="form-control" id="problemadesc" name="problemadesc" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                </form:form>
                 </div>
             </div>
         </div>
@@ -135,3 +137,11 @@
 
 
 <%@ include file="templates/footer.jsp"%>
+
+    <script>
+        $(document)
+            .on("click", ".problem_link", function(){
+                $("#pedido_id_modal").val($(this).attr("data_pedido"));
+                $("#pedido_id_span").html("[" +$(this).attr("data_pedido")+ "]");
+            });
+    </script>
