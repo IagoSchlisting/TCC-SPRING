@@ -158,7 +158,7 @@
             </div>
         </div>
 
-        <div class="col-md-6" id="bandeira-div" style="display: ${pedido.tipoPagamento.toString().equals("CARTAO") ? 'block' : 'none'}">
+        <div class="col-md-6" id="bandeira-div" style="display: ${pedido.tipoPagamento.toString().equals("DINHEIRO") ? 'none' : 'block'}">
             <div class="form-group">
                 <label for="bandeira"> Bandeira </label>
                 <select class="form-control" name="bandeira" id="bandeira">
@@ -170,7 +170,7 @@
             </div>
         </div>
 
-        <div class="col-md-6" id="troco-div" style="display: ${pedido.tipoPagamento.toString().equals("CARTAO") ? 'none' : 'block'}">
+        <div class="col-md-6" id="troco-div" style="display: ${pedido.tipoPagamento.toString().equals("DINHEIRO") ? 'block' : 'none'}">
             <div class="form-group">
                 <label for="troco">Troco necessário</label>
                 <div class="input-group">
@@ -220,9 +220,13 @@
                 }
             });
 
-            if(${pedido.tipoPedido.toString().equals('TELE')}){
+            if(${not empty pedido.tipoPedido and pedido.tipoPedido.toString().equals('TELE')}){
                 $(".endereco").prop("disabled", false);
             }else{
-                $(".endereco").prop("disabled", true);
+                if(${empty pedido.tipoPedido}){
+                    $(".endereco").prop("disabled", false);
+                }else{
+                    $(".endereco").prop("disabled", true);
+                }
             }
     </script>
