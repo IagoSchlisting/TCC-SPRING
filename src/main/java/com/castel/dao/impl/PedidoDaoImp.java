@@ -96,8 +96,14 @@ public class PedidoDaoImp extends HibernateDaoSupport implements PedidoDao {
         return problemas.isEmpty() ? null : problemas.get(0);
     }
     @Override
-    public List<Pedido> listPedidosByStatus(int status_id, String filter){
-        return (List<Pedido>) this.getHibernateTemplate().find("from com.castel.models.Pedido where START LIKE '%"+filter+"%' AND STATUSPEDIDO = " + status_id);
+    @Transactional
+    public List<Pedido> listPedidosByStatus(int status_id, String filter, int limit){
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = (Query) session.createQuery("FROM com.castel.models.Pedido where START LIKE '%"+filter+"%' AND STATUSPEDIDO = " + status_id + " ORDER BY START");
+        if(limit > 0){
+            query.setMaxResults(limit);
+        }
+        return (List<Pedido>) query.getResultList();
     }
 
 

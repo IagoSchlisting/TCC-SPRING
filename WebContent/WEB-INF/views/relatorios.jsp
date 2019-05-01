@@ -110,12 +110,12 @@
                 <tr style="background-color:${not problema ? '#c3d6c6' : '#ff2f004f'};">
                     <th style="width:30%"> Período </th>
                     <th style="width:30%"> Quantidade de Pedidos </th>
-                    <th> Total Faturado </th>
+                    <th> Total ${problema ? 'Prejuíso' : 'Faturado '}</th>
                 </tr>
                 <tr>
-                    <td> 02/08/2018 </td>
-                    <td> 89 </td>
-                    <td> R$6800,00 </td>
+                    <td> ${periodo} </td>
+                    <td> ${qtdp} </td>
+                    <td> R$${faturado} </td>
                 </tr>
             </table>
         </div>

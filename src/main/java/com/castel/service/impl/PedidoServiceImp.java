@@ -81,7 +81,7 @@ public class PedidoServiceImp implements PedidoService {
     }
 
     @Override
-    public List<Pedido> listPedidosByStatus(int status_id, String filter){
-        return this.pedidoDao.listPedidosByStatus(status_id, filter);
+    public List<Pedido> listPedidosByStatus(int status_id, String filter, int limit){
+        return this.pedidoDao.listPedidosByStatus(status_id, filter, limit);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,7 +86,24 @@ public class HomeController extends BaseController {
             status_id = 5;
         }
 
-        model.addAttribute("pedidos", this.pedidoService.listPedidosByStatus(status_id,""));
+        List<Pedido> pedidos = new ArrayList<>();
+        pedidos = this.pedidoService.listPedidosByStatus(status_id,"", 100);
+        Double faturado = 0.0;
+
+        for(Pedido pedido : pedidos){
+            faturado = faturado + pedido.getValorTotal();
+        }
+
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String start = pedidos.get(0).getStart().format(df);
+        String end = pedidos.get(pedidos.size()-1).getStart().format(df);
+
+        model.addAttribute("faturado", faturado);
+        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("qtdp", pedidos.size());
+
+        model.addAttribute("periodo", "De " + start + " até " + end);
+
         model.addAttribute("formatter", dateformatter);
         model.addAttribute("tele", TipoPedido.TELE);
         model.addAttribute("cartao", TipoPagamento.CARTAO);
@@ -113,15 +131,33 @@ public class HomeController extends BaseController {
 
         String filter;
         List<Pedido> pedidos;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String periodo = "";
 
         if(filtro_mes.equals("0")){
-            pedidos = this.pedidoService.listPedidosByStatus(status_id, filtro_dia);
+            pedidos = this.pedidoService.listPedidosByStatus(status_id, filtro_dia, 0);
+            periodo = pedidos.get(0).getStart().format(df);
         }else{
             filter = filtro_ano + "-" + filtro_mes;
-            pedidos = this.pedidoService.listPedidosByStatus(status_id, filter);
+            pedidos = this.pedidoService.listPedidosByStatus(status_id, filter, 0);
+            String start = pedidos.get(0).getStart().format(df);
+            String end = pedidos.get(pedidos.size()-1).getStart().format(df);
+            periodo = "De " + start + " até " + end;
         }
 
+        Double faturado = 0.0;
+
+        for(Pedido pedido : pedidos){
+            faturado = faturado + pedido.getValorTotal();
+        }
+
+
+        model.addAttribute("faturado", faturado);
         model.addAttribute("pedidos", pedidos);
+        model.addAttribute("qtdp", pedidos.size());
+
+        model.addAttribute("periodo", periodo);
+
         model.addAttribute("formatter", dateformatter);
         model.addAttribute("tele", TipoPedido.TELE);
         model.addAttribute("cartao", TipoPagamento.CARTAO);
