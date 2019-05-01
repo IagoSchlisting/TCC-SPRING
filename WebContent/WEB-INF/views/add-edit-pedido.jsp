@@ -89,18 +89,19 @@
             </table>
 
         <form:form id="finalizapedido" action="/finaliza/pedido" name="finalizapedido" method="post">
+
             <input type="hidden" name="pedido_id" id="pedido_id" value="${pedido.id}">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="nome"> Nome do Cliente </label>
-                <input type="text" class="form-control" name="nome" id="nome">
+                <input type="text" class="form-control" name="nome" id="nome" value="${type.equals('Editando') ? pedido.nomeCliente : ''}">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label for="telefone"> Telefone </label>
-                <input type="number" class="form-control" name="telefone" id="telefone">
+                <input type="number" class="form-control" name="telefone" id="telefone" value="${type.equals('Editando') ? pedido.telefone : ''}">
             </div>
         </div>
 
@@ -108,9 +109,9 @@
             <div class="form-group">
                 <label for="tipoPedido"> Tipo de Pedido </label>
                 <select class="form-control" name="tipoPedido" id="tipoPedido">
-                    <option value="TELE">Tele-Entrega</option>
-                    <option value="BALCAO">Balcão</option>
-                    <option value="SALAO">Salão</option>
+                    <option value="TELE" ${pedido.tipoPedido.toString().equals('TELE') ? 'selected' : ''}>Tele-Entrega</option>
+                    <option value="BALCAO" ${pedido.tipoPedido.toString().equals('BALCAO') ? 'selected' : ''}>Balcão</option>
+                    <option value="SALAO" ${pedido.tipoPedido.toString().equals('SALAO') ? 'selected' : ''}>Salão</option>
                 </select>
             </div>
         </div>
@@ -118,21 +119,21 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="bairro"> Bairro </label>
-                <input type="text" class="form-control endereco" name="bairro" id="bairro">
+                <input type="text" class="form-control endereco" name="bairro" id="bairro" value="${pedido.tipoPedido.toString().equals('TELE') ? pedido.endereco.bairro: ''}">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label for="rua"> Rua </label>
-                <input type="text" class="form-control endereco" name="rua" id="rua">
+                <input type="text" class="form-control endereco" name="rua" id="rua" value="${pedido.tipoPedido.toString().equals('TELE') ? pedido.endereco.rua: ''}">
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label for="numero"> Nº </label>
-                <input type="number" class="form-control endereco" name="numero" id="numero">
+                <input type="number" class="form-control endereco" name="numero" id="numero" value="${pedido.tipoPedido.toString().equals('TELE') ? pedido.endereco.numero: ''}">
             </div>
         </div>
 
@@ -151,30 +152,30 @@
             <div class="form-group">
                 <label for="tipoPagamento"> Forma de Pagamento </label>
                 <select class="form-control" name="tipoPagamento" id="tipoPagamento">
-                    <option value="CARTAO"> Cartão </option>
-                    <option value="DINHEIRO"> Dinheiro </option>
+                    <option value="CARTAO" ${pedido.tipoPagamento.toString().equals("CARTAO") ? 'selected' : ''}> Cartão </option>
+                    <option value="DINHEIRO" ${pedido.tipoPagamento.toString().equals("DINHEIRO") ? 'selected' : ''}> Dinheiro </option>
                 </select>
             </div>
         </div>
 
-        <div class="col-md-6" id="bandeira-div">
+        <div class="col-md-6" id="bandeira-div" style="display: ${pedido.tipoPagamento.toString().equals("CARTAO") ? 'block' : 'none'}">
             <div class="form-group">
                 <label for="bandeira"> Bandeira </label>
                 <select class="form-control" name="bandeira" id="bandeira">
-                    <option value="NONE" selected="selected"> Selecione a Bandeira</option>
-                    <option value="MASTERCARD"> Mastercard </option>
-                    <option value="VISA">  Visa </option>
-                    <option value="ALELO">  Alelo </option>
+                    <option value="NONE"> Selecione a Bandeira</option>
+                    <option value="MASTERCARD" ${pedido.bandeira.toString().equals("MASTERCARD") ? 'selected' : ''}> Mastercard </option>
+                    <option value="VISA" ${pedido.bandeira.toString().equals("VISA") ? 'selected' : ''}>  Visa </option>
+                    <option value="ALELO" ${pedido.bandeira.toString().equals("ALELO") ? 'selected' : ''}>  Alelo </option>
                 </select>
             </div>
         </div>
 
-        <div class="col-md-6" id="troco-div" style="display: none">
+        <div class="col-md-6" id="troco-div" style="display: ${pedido.tipoPagamento.toString().equals("CARTAO") ? 'none' : 'block'}">
             <div class="form-group">
                 <label for="troco">Troco necessário</label>
                 <div class="input-group">
                     <span class="input-group-addon">R$</span>
-                    <input type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="troco" name="troco"/>
+                    <input type="number" value="${pedido.troco}" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="troco" name="troco"/>
                 </div>
             </div>
         </div>
@@ -219,4 +220,9 @@
                 }
             });
 
+            if(${pedido.tipoPedido.toString().equals('TELE')}){
+                $(".endereco").prop("disabled", false);
+            }else{
+                $(".endereco").prop("disabled", true);
+            }
     </script>

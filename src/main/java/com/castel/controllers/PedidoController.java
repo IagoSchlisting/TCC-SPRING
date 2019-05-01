@@ -86,7 +86,7 @@ public class PedidoController extends BaseController {
         }catch (Exception e){
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return new RedirectView("/pedido/add");
+        return new RedirectView("/editar/pedido/" + pedido_id);
     }
 
     @RequestMapping(value = "/pizza/add" , method = RequestMethod.POST)
@@ -131,9 +131,19 @@ public class PedidoController extends BaseController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 
-
-        return new RedirectView("/pedido/add");
+        return new RedirectView("/editar/pedido/" + pedido_id);
     }
+
+
+    @RequestMapping(value = "/editar/pedido/{id}" , method = RequestMethod.GET)
+    public String editPedidoPage(@PathVariable("id") int id, Model model){
+        model.addAttribute("type", "Editando");
+        model.addAttribute("pedido", this.pedidoService.getPedidoById(id));
+        return "add-edit-pedido";
+    }
+
+
+
 
     public Double calculateValorPizza(Pizza pizza){
 
@@ -234,11 +244,10 @@ public class PedidoController extends BaseController {
     @RequestMapping(value = "/remove/item/{id}" , method = RequestMethod.GET)
     public RedirectView removeItem(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
 
+        Item item = this.pedidoService.getItemById(id);
+        Pedido pedido = item.getPedido();
+        int pedido_id = pedido.getId();
         try{
-
-            Item item = this.pedidoService.getItemById(id);
-            Pedido pedido = item.getPedido();
-
             if(pedido.getValorTotal() - item.getValor() < 1){
                 pedido.setValorTotal(0.0);
             }else{
@@ -253,7 +262,7 @@ public class PedidoController extends BaseController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 
-        return new RedirectView("/pedido/add");
+        return new RedirectView("/editar/pedido/" + pedido_id);
     }
 
 
@@ -287,16 +296,20 @@ public class PedidoController extends BaseController {
                 endereco.setNumero(numero);
                 this.pedidoService.addEndereco(endereco);
                 pedido.setEndereco(endereco);
+            }else{
+                pedido.setEndereco(null);
             }
 
             pedido.setTipoPagamento(tipoPagamento);
             if(tipoPagamento == TipoPagamento.CARTAO){
                 Bandeira bandeira = Bandeira.valueOf(request.getParameter("bandeira"));
                 pedido.setBandeira(bandeira);
+                pedido.setTroco(0.0);
             }
             if(tipoPagamento == TipoPagamento.DINHEIRO){
                 Double troco = Double.parseDouble(request.getParameter("troco"));
                 pedido.setTroco(troco);
+                pedido.setBandeira(Bandeira.NONE);
             }
 
             pedido.setStart(LocalDateTime.now());
