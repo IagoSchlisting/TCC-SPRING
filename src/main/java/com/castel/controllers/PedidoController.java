@@ -316,6 +316,11 @@ public class PedidoController extends BaseController {
             pedido.setStatusPedido(StatusPedido.EM_PRODUCAO);
             this.pedidoService.updatePedido(pedido);
 
+            // IMPRIME PEDIDO
+            ImpressaoController impressaoController = new ImpressaoController();
+            impressaoController.detectaImpressoras();
+            impressaoController.imprime(pedido);
+
             redirectAttributes.addFlashAttribute("msg", "Pedido finalizado com sucesso!");
         }catch (Exception e){
             redirectAttributes.addFlashAttribute("error", e.getMessage());

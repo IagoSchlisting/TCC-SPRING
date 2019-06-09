@@ -1,6 +1,6 @@
 package com.castel.controllers;
 
-import com.castel.models.Pedido;
+import com.castel.models.*;
 
 import javax.print.*;
 import javax.swing.*;
@@ -49,45 +49,61 @@ public class ImpressaoController {
     }
 
     public String formatText(Pedido pedido){
-        return "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido " +
-                "\n testeeeeeeeeeeeeeeee muito doido ";
-    }
+        String cabecalho;
+        cabecalho = " =========================== ";
+        cabecalho += "\n Pedido Numero: " + pedido.getId();
+        cabecalho += "\n =========================== ";
 
-//
-//    public static List<String> retornaImressoras(){
-//        try {
-//            List<String> listaImpressoras = new ArrayList<>();
-//            DocFlavor df = DocFlavor.SERVICE_FORMATTED.PRINTABLE;
-//            PrintService[] ps = PrintServiceLookup.lookupPrintServices(df, null);
-//            for (PrintService p : ps) {
-//                listaImpressoras.add(p.getName());
-//            }
-//            return listaImpressoras;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+        String str_pizza;
+        String str_pizzas = "\n\n";
+        String bebidas = "\n\n";
+
+        for(Item it : pedido.getItens()){
+            if(it.isIspizza()) {
+                String borda="";
+                if (it.getPizza().isComborda()) {
+                    borda = "c/borda";
+                }
+                str_pizza = " Pizza " + it.getPizza().getTamanhoPizza() + " " + borda;
+
+                for (Sabor sabor : it.getPizza().getSabores()) {
+                    str_pizza += "\n - " + sabor.getSabor();
+                }
+
+                str_pizza += "\n ---------------------------\n";
+                str_pizzas += str_pizza;
+            }
+        }
+
+        for(Item it : pedido.getItens()){
+            if(!it.isIspizza()){
+                bebidas += " Bebida: " + it.getBebida().getBebida() + "\n";
+            }
+        }
+
+        String dadosCliente = "\n\n -------- Dados do Cliente ------";
+        dadosCliente += "\n Nome: " + pedido.getNomeCliente();
+        dadosCliente += "\n Telefone: " + pedido.getTelefone();
+        dadosCliente += "\n Tipo de Pagamento: " + pedido.getTipoPagamento();
+
+        if(pedido.getTipoPagamento().equals(TipoPagamento.CARTAO)){
+            dadosCliente += "\n Bandeira: " + pedido.getBandeira();
+        }else{
+            dadosCliente += "\n Troco: " + pedido.getTroco();
+        }
+
+        dadosCliente += "\n TipoPedido: " + pedido.getTipoPedido();
+        if(pedido.getTipoPedido().equals(TipoPedido.TELE)){
+            dadosCliente += "\n\n -------- Endereco Tele -------";
+            dadosCliente += "\n Bairro: " + pedido.getEndereco().getBairro();
+            dadosCliente += "\n Rua: " + pedido.getEndereco().getRua();
+            dadosCliente += "\n Numero: " + pedido.getEndereco().getNumero();
+        }
+
+        dadosCliente += "\n\n ----------------------------";
+        dadosCliente += "\n Total: R$" + pedido.getValorTotal();
+
+        String body = str_pizzas + bebidas + dadosCliente + "\n\n\n\n\n\n\n" +(char)27+(char)109;
+        return cabecalho + body;
+    }
 }

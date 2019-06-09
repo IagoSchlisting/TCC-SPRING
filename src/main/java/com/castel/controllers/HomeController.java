@@ -230,14 +230,13 @@ public class HomeController extends BaseController {
         return "banco-de-bebidas";
     }
 
-    @RequestMapping(value = "/imprime", method = RequestMethod.GET)
-    public RedirectView impressaoTest(){
+    @RequestMapping(value = "/reimprimir/pedido/{id}", method = RequestMethod.GET)
+    public RedirectView reimprimePedido(@PathVariable("id") int id){
         ImpressaoController impressaoController = new ImpressaoController();
-        impressaoController.detectaImpressoras();;
-        impressaoController.imprime(new Pedido());
+        impressaoController.detectaImpressoras();
+        impressaoController.imprime(this.pedidoService.getPedidoById(id));
         return new RedirectView("/");
     }
-
 
     /**
      * Redirects to 403 page
