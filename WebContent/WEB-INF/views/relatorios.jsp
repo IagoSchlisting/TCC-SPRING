@@ -73,35 +73,42 @@
                 <th> Valor Total</th>
             </tr>
 
-            <c:forEach var="pedido" items="${pedidos}">
+            <c:if test="${empty pedidos}">
+                <tr>
+                    <td colspan="8" align="center" style="background-color: #e2e2e2;color: #595a6d;"> Nenhum pedido encontrado. </td>
+                </tr>
+            </c:if>
+            <c:if test="${not empty pedidos}">
+                <c:forEach var="pedido" items="${pedidos}">
 
-            <tr>
-                <td> ${pedido.id} </td>
-                <td> ${pedido.nomeCliente} </td>
-                <td>
-                    <c:if test="${pedido.tipoPedido.equals(tele)}">
-                        Rua ${pedido.endereco.rua}, Bairro ${pedido.endereco.bairro}, Nº ${pedido.endereco.numero}
-                    </c:if>
+                    <tr>
+                        <td> ${pedido.id} </td>
+                        <td> ${pedido.nomeCliente} </td>
+                        <td>
+                            <c:if test="${pedido.tipoPedido.equals(tele)}">
+                                Rua ${pedido.endereco.rua}, Bairro ${pedido.endereco.bairro}, Nº ${pedido.endereco.numero}
+                            </c:if>
 
-                    <c:if test="${not pedido.tipoPedido.equals(tele)}">
-                        [ ${pedido.tipoPedido} ]
-                    </c:if>
-                </td>
-                <td> ${pedido.start.format(formatter)} </td>
-                <td> ${pedido.end.format(formatter)} </td>
-                <td> <button class="btn btn-ifo" data-toggle="modal" data-target="#modal_${pedido.id}"><span class="glyphicon glyphicon-plus"></span> </button> </td>
-                <td>
-                    <c:if test="${pedido.tipoPagamento.equals(cartao)}">
-                        Cartão / ${pedido.bandeira}
-                    </c:if>
-                    <c:if test="${not pedido.tipoPagamento.equals(cartao)}">
-                        Dinheiro / Troco - R$${pedido.troco}
-                    </c:if>
-                </td>
-                <td> R$${pedido.valorTotal}</td>
-            </tr>
+                            <c:if test="${not pedido.tipoPedido.equals(tele)}">
+                                [ ${pedido.tipoPedido} ]
+                            </c:if>
+                        </td>
+                        <td> ${pedido.start.format(formatter)} </td>
+                        <td> ${pedido.end.format(formatter)} </td>
+                        <td> <button class="btn btn-ifo" data-toggle="modal" data-target="#modal_${pedido.id}"><span class="glyphicon glyphicon-plus"></span> </button> </td>
+                        <td>
+                            <c:if test="${pedido.tipoPagamento.equals(cartao)}">
+                                Cartão / ${pedido.bandeira}
+                            </c:if>
+                            <c:if test="${not pedido.tipoPagamento.equals(cartao)}">
+                                Dinheiro / Troco - R$${pedido.troco}
+                            </c:if>
+                        </td>
+                        <td> R$${pedido.valorTotal}</td>
+                    </tr>
 
-            </c:forEach>
+                </c:forEach>
+            </c:if>
         </table>
 
 
@@ -217,3 +224,9 @@
     </script>
 
 <%@ include file="templates/footer.jsp"%>
+
+    <script>
+        function setTwoNumberDecimal(event) {
+            this.value = parseFloat(this.value).toFixed(2);
+        }
+    </script>

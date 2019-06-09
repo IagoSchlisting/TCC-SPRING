@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class HomeController extends BaseController {
 
         User principal = this.getPrincipalUser();
         model.addAttribute("principal", principal);
+
+        if(principal.getRoles() == null){return "login";}
 
         for (Role role: principal.getRoles()){
             if(new String(role.getRole()).equals("ROLE_OWNER") || new String(role.getRole()).equals("ROLE_USER")){
@@ -88,6 +92,11 @@ public class HomeController extends BaseController {
 
         List<Pedido> pedidos = new ArrayList<>();
         pedidos = this.pedidoService.listPedidosByStatus(status_id,"", 100);
+
+
+        if(pedidos.isEmpty()){
+            return this.retornaRelatorioVazio(model, "");
+        }
         Double faturado = 0.0;
 
         for(Pedido pedido : pedidos){
@@ -98,7 +107,10 @@ public class HomeController extends BaseController {
         String start = pedidos.get(0).getStart().format(df);
         String end = pedidos.get(pedidos.size()-1).getStart().format(df);
 
-        model.addAttribute("faturado", faturado);
+        DecimalFormat def = new DecimalFormat();
+        def.setMaximumFractionDigits(2);
+
+        model.addAttribute("faturado", def.format(faturado));
         model.addAttribute("pedidos", pedidos);
         model.addAttribute("qtdp", pedidos.size());
 
@@ -115,8 +127,6 @@ public class HomeController extends BaseController {
     @RequestMapping(value = "/filtro/relatorio" , method = RequestMethod.GET)
     public String relatoriosPageFiltro(Model model, WebRequest request){
 
-        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        dateformatter = DateTimeFormatter.ofPattern("HH:mm");
         int status_id;
 
         if(request.getParameter("problema").equals("true")){
@@ -136,10 +146,20 @@ public class HomeController extends BaseController {
 
         if(filtro_mes.equals("0")){
             pedidos = this.pedidoService.listPedidosByStatus(status_id, filtro_dia, 0);
+
+            if(pedidos.isEmpty()){
+                return this.retornaRelatorioVazio(model, filtro_dia);
+            }
+
             periodo = pedidos.get(0).getStart().format(df);
         }else{
             filter = filtro_ano + "-" + filtro_mes;
             pedidos = this.pedidoService.listPedidosByStatus(status_id, filter, 0);
+
+            if(pedidos.isEmpty()){
+                return this.retornaRelatorioVazio(model, filtro_mes + "/" + filtro_ano);
+            }
+
             String start = pedidos.get(0).getStart().format(df);
             String end = pedidos.get(pedidos.size()-1).getStart().format(df);
             periodo = "De " + start + " até " + end;
@@ -152,12 +172,16 @@ public class HomeController extends BaseController {
         }
 
 
-        model.addAttribute("faturado", faturado);
+        DecimalFormat def = new DecimalFormat();
+        def.setMaximumFractionDigits(2);
+
+        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        dateformatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        model.addAttribute("faturado", def.format(faturado));
         model.addAttribute("pedidos", pedidos);
         model.addAttribute("qtdp", pedidos.size());
-
         model.addAttribute("periodo", periodo);
-
         model.addAttribute("formatter", dateformatter);
         model.addAttribute("tele", TipoPedido.TELE);
         model.addAttribute("cartao", TipoPagamento.CARTAO);
@@ -165,6 +189,20 @@ public class HomeController extends BaseController {
         return "relatorios";
     }
 
+    public String retornaRelatorioVazio(Model model, String periodo){
+
+        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        dateformatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        model.addAttribute("faturado", 0.0);
+        model.addAttribute("pedidos", null);
+        model.addAttribute("qtdp", 0);
+        model.addAttribute("periodo", periodo);
+        model.addAttribute("formatter", dateformatter);
+        model.addAttribute("tele", TipoPedido.TELE);
+        model.addAttribute("cartao", TipoPagamento.CARTAO);
+        return "relatorios";
+    }
 
 
 
@@ -191,6 +229,15 @@ public class HomeController extends BaseController {
         model.addAttribute("bebidas", this.bebidaService.listBebidas());
         return "banco-de-bebidas";
     }
+
+    @RequestMapping(value = "/imprime", method = RequestMethod.GET)
+    public RedirectView impressaoTest(){
+        ImpressaoController impressaoController = new ImpressaoController();
+        impressaoController.detectaImpressoras();;
+        impressaoController.imprime(new Pedido());
+        return new RedirectView("/");
+    }
+
 
     /**
      * Redirects to 403 page

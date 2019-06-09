@@ -12,7 +12,7 @@
                     <select class="form-control" name="tamanhopizza" id="tamanhopizza">
                         <option value="GIGANTE"> Gigante </option>
                         <option value="GRANDE"> Grande </option>
-                        <option value="MEDIA"> Média </option>
+                        <option value="MEDIA"> Media </option>
                         <option value="BROTO"> Broto </option>
                     </select>
                 </div>

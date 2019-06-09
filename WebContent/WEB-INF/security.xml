@@ -6,14 +6,13 @@
 
     <http auto-config="true">
         <access-denied-handler error-page="/403" />
-        <intercept-url pattern="/" access="hasRole('ROLE_USER')" />
-
-    
         <intercept-url pattern="/user/**" access="hasRole('ROLE_OWNER')" />
         <intercept-url pattern="/administracao**" access="hasRole('ROLE_OWNER')" />
-        <intercept-url pattern="/rel**" access="hasRole('ROLE_OWNER')" />
+        <intercept-url pattern="/relatorio/**" access="hasRole('ROLE_OWNER')" />
         <intercept-url pattern="/login" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
+        <intercept-url pattern="/post/**" access="permitAll" />
+        <intercept-url pattern="/get/**" access="permitAll" />
 
         <form-login
                 login-page="/login"
@@ -23,7 +22,7 @@
                 password-parameter="password" />
         <logout logout-success-url="/login?logout" />
         <!-- enable csrf protection -->
-        <csrf/>
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager alias="authenticationManager">
