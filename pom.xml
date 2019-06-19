@@ -106,22 +106,23 @@
         </dependency>
 
         <!-- Hibernate Dependencies -->
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.2.Final</version>
+            <version>5.2.17.Final</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.eclipse.persistence</groupId>-->
+        <!--            <artifactId>javax.persistence</artifactId>-->
+        <!--            <version>2.0.0</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.2.Final</version>
+            <version>1.0.0.Final</version>
         </dependency>
 
         <dependency>
@@ -130,10 +131,15 @@
             <version>5.0.1.Final</version>
         </dependency>
         <dependency>
-            <groupId>javassist</groupId>
+            <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.8.0.GA</version>
+            <version>3.24.1-GA</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javassist</groupId>-->
+<!--            <artifactId>javassist</artifactId>-->
+<!--            <version>3.8.0.GA</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -156,7 +162,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.0.pr4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+        <!-- https://mvnrepository.com/ajavassistrtifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
