@@ -163,9 +163,18 @@
                 <label for="bandeira"> Bandeira </label>
                 <select class="form-control" name="bandeira" id="bandeira">
                     <option value="NONE"> Selecione a Bandeira</option>
-                    <option value="MASTERCARD" ${pedido.bandeira.toString().equals("MASTERCARD") ? 'selected' : ''}> Mastercard </option>
-                    <option value="VISA" ${pedido.bandeira.toString().equals("VISA") ? 'selected' : ''}>  Visa </option>
-                    <option value="ALELO" ${pedido.bandeira.toString().equals("ALELO") ? 'selected' : ''}>  Alelo </option>
+                    <option value="VISA" ${pedido.bandeira.toString().equals("VISA") ? 'selected' : ''}>  VISA </option>
+                    <option value="MASTER" ${pedido.bandeira.toString().equals("MASTER") ? 'selected' : ''}> MASTER </option>
+                    <option value="ALELO" ${pedido.bandeira.toString().equals("ALELO") ? 'selected' : ''}>  ALELO </option>
+                    <option value="SODEXO" ${pedido.bandeira.toString().equals("SODEXO") ? 'selected' : ''}>  SODEXO </option>
+                    <option value="HIPERCARD" ${pedido.bandeira.toString().equals("HIPERCARD") ? 'selected' : ''}>  HIPERCARD </option>
+                    <option value="ELO" ${pedido.bandeira.toString().equals("ELO") ? 'selected' : ''}>  ELO </option>
+                    <option value="CIELO" ${pedido.bandeira.toString().equals("CIELO") ? 'selected' : ''}>  CIELO </option>
+                    <option value="BANRI_VR" ${pedido.bandeira.toString().equals("BANRI_VR") ? 'selected' : ''}>  BANRI_VR </option>
+                    <option value="BANRI_VA" ${pedido.bandeira.toString().equals("BANRI_VA") ? 'selected' : ''}>  BANRI_VA </option>
+                    <option value="GREEN_VR" ${pedido.bandeira.toString().equals("GREEN_VR") ? 'selected' : ''}>  GREEN_VR </option>
+                    <option value="GREEN_VA" ${pedido.bandeira.toString().equals("GREEN_VA") ? 'selected' : ''}>  GREEN_VA </option>
+                    <option value="VR" ${pedido.bandeira.toString().equals("VR") ? 'selected' : ''}>  VR </option>
                 </select>
             </div>
         </div>

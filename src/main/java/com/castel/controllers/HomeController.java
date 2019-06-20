@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.DecimalFormat;
@@ -231,10 +232,10 @@ public class HomeController extends BaseController {
     }
 
     @RequestMapping(value = "/reimprimir/pedido/{id}", method = RequestMethod.GET)
-    public RedirectView reimprimePedido(@PathVariable("id") int id){
+    public RedirectView reimprimePedido(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
         ImpressaoController impressaoController = new ImpressaoController();
-        impressaoController.detectaImpressoras();
-        impressaoController.imprime(this.pedidoService.getPedidoById(id));
+        List<String> lines = impressaoController.formatText(this.pedidoService.getPedidoById(id));
+        redirectAttributes.addFlashAttribute("imprimir", lines);
         return new RedirectView("/");
     }
 

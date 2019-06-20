@@ -317,10 +317,9 @@ public class PedidoController extends BaseController {
             this.pedidoService.updatePedido(pedido);
 
             // IMPRIME PEDIDO
-            ImpressaoController impressaoController = new ImpressaoController();
-            impressaoController.detectaImpressoras();
-            impressaoController.imprime(pedido);
-
+             ImpressaoController impressaoController = new ImpressaoController();
+            List<String> lines = impressaoController.formatText(pedido);
+            redirectAttributes.addFlashAttribute("imprimir", lines);
             redirectAttributes.addFlashAttribute("msg", "Pedido finalizado com sucesso!");
         }catch (Exception e){
             redirectAttributes.addFlashAttribute("error", e.getMessage());

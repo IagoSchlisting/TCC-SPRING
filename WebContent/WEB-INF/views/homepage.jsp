@@ -107,7 +107,7 @@
 
         <!-- Modal -->
     <div class="modal fade" id="modalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modalnot-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"> Área de registro de problemas.</h5>
@@ -137,8 +137,22 @@
 
 
 <%@ include file="templates/footer.jsp"%>
-
+    <OBJECT id="BemaMP32" height="14" width="14" classid="clsid:310DBDAC-85FF-4008-82A8-E22A09F9460B"  VIEWASTEXT></OBJECT>
     <script>
+
+        <c:if test="${not empty imprimir}">
+            BemaMP32.ConfiguraModeloImpressora(7);
+            BemaMP32.iniciaPorta("USB");
+            <c:forEach var="linha" items="${imprimir}">
+                BemaMP32.BematechTX("${linha}");
+                BemaMP32.BematechTX("\n");
+            </c:forEach>
+            BemaMP32.BematechTX("\n");
+            BemaMP32.BematechTX("\n");
+            BemaMP32.AcionaGuilhotina(0);
+            BemaMP32.FechaPorta();
+        </c:if>
+
         $(document)
             .on("click", ".problem_link", function(){
                 $("#pedido_id_modal").val($(this).attr("data_pedido"));
